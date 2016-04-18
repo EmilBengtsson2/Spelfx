@@ -31,7 +31,7 @@ public class Ram extends Application {
 	}
 
 	public static void main(String[] args) {
-		Application.launch(args);;
+		Application.launch(args);
 	}
 
 	@Override
