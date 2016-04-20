@@ -4,6 +4,7 @@ import enemies.HatEnemy;
 import enemies.RedSkull;
 import framework.PlayerListener;
 import weapons.Sword;
+import weapons.Sword2;
 
 public class LevelGenerator {
 	
@@ -18,7 +19,8 @@ public class LevelGenerator {
 	
 	private static void level1(World world, PlayerListener listener) {
 		Player player = new Player(1.5, 600, 450, listener, world);
-		player.setWeapon(new Sword(player, world.getEntityController())); //Här byter man vapen
+//		player.setWeapon(new Sword(player, world.getEntityController())); //Här byter man vapen
+		player.setWeapon(new Sword2(player));
 		world.getAnimateEntities().add(player);
 
 		// Enemy 1

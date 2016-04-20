@@ -10,14 +10,10 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class EntityController {
 
-	private PlayerListener listener;
 	private ArrayList<AnimateEntity> allEntities;
-	private ArrayList<Entity> objects;
-	private int tX, tY;
+	private ArrayList<Entity> objects;	
 
-	public EntityController(PlayerListener listener) {
-		this.listener = listener;
-		tX = tY = 0;
+	public EntityController(PlayerListener listener) {			
 		allEntities = new ArrayList<AnimateEntity>();		
 		objects = new ArrayList<Entity>();			
 	}
@@ -31,31 +27,12 @@ public class EntityController {
 		}
 	}
 
-	public void paintEntity(GraphicsContext gc) {
-		double playerPosX, playerPosY;
-		for (AnimateEntity e : allEntities) {
-			if(e instanceof Player) {
-				gc.translate(-tX, -tY);
-				tX = tY = 0;
-				playerPosX = e.getPosition().getX();
-				playerPosY = e.getPosition().getY();
-				if(playerPosX > 600 && playerPosX < 1800) {
-					tX = (int) -(playerPosX - 600);
-				}
-				if(playerPosY > 450 && playerPosY < 1350) {
-					tY = (int) -(playerPosY - 450);
-				}
-				gc.translate(tX, tY);
-				listener.setTranslatedXY(tX, tY);
-				break;
-			}
-		}
+	public void paintEntity(GraphicsContext gc) {		
 		for (AnimateEntity e : allEntities) {
 			e.paint(gc);
 		}
 		for (Entity i : getObjects()) {
 			i.paint(gc);
-
 		}
 	}
 

@@ -50,7 +50,7 @@ public class Sword implements Weapon {
 	}
 	
 	@Override
-	public void Animation() {
+	public void animation() {
 		if(animation != 0 || System.currentTimeMillis() - lastAnimationTime > BASE_COOLDOWN) {
 			if(animation == 0) {
 				lastAnimationTime = System.currentTimeMillis();
@@ -80,7 +80,7 @@ public class Sword implements Weapon {
 		p = player.getPosition();
 		
 		if(animation != 0)
-			Animation();
+			animation();
 		
 		gc.setFill(Color.DIMGRAY);
 		gc.translate(p.getX()+xDislocation+5, p.getY()-20);

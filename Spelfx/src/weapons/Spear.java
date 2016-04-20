@@ -49,7 +49,7 @@ public class Spear implements Weapon{
 	}
 	
 	@Override //Måste ändra, har samma animation som svärdet nu.
-	public void Animation() {
+	public void animation() {
 		if(animation != 0 || System.currentTimeMillis() - lastAnimationTime > BASE_COOLDOWN) {
 			if(animation == 0) {
 				lastAnimationTime = System.currentTimeMillis();
@@ -79,7 +79,7 @@ public class Spear implements Weapon{
 		p = player.getPosition();
 		
 		if(animation != 0)
-			Animation();
+			animation();
 		
 		gc.setFill(Color.SANDYBROWN);
 		gc.translate(p.getX()+xDislocation+5, p.getY()-20);

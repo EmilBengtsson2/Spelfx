@@ -28,6 +28,9 @@ public abstract class Entity {
 		public double getHeight() {
 			return height;
 		}
+		public World getWorld(){
+			return world;
+		}
 		
 		public abstract void paint(GraphicsContext gc);
 		
