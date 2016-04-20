@@ -68,7 +68,7 @@ public class Player extends AnimateEntity {
 				if(block.isSolid()) {
 					position.setX(oldPosition.getX());
 					position.setY(oldPosition.getY());
-				} else if (block instanceof EventBlock) {
+				} else if (block instanceof EventBlock && !block.getEventStatus()) {
 					block.event();
 				}
 			}			

@@ -37,7 +37,7 @@ public class World {
 	public void checkWin() {
 		if (victory) {
 			System.out.println("Du vann");
-			System.exit(0);
+			victory=false;
 		}
 	}
 
