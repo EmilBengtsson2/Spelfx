@@ -48,7 +48,6 @@ public class Spear implements Weapon{
 			System.out.println("-----------------------------------------------------------------------");
 	}
 	
-	@Override //Måste ändra, har samma animation som svärdet nu.
 	public void animation() {
 		if(animation != 0 || System.currentTimeMillis() - lastAnimationTime > BASE_COOLDOWN) {
 			if(animation == 0) {
@@ -99,5 +98,4 @@ public class Spear implements Weapon{
 		gc.rotate(Math.toDegrees(-theta));
 		gc.translate(-(p.getX()+xDislocation+10), -(p.getY()));
 	}
-
 }

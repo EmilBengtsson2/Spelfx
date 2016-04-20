@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import entities.AnimateEntity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 import others.EntityController;
 import others.Player;
 import others.Position;
@@ -51,7 +50,6 @@ public class Sword implements Weapon {
 			System.out.println("-----------------------------------------------------------------------");
 	}
 	
-	@Override
 	public void animation() {
 		if(animation != 0 || System.currentTimeMillis() - lastAnimationTime > BASE_COOLDOWN) {
 			if(animation == 0) {

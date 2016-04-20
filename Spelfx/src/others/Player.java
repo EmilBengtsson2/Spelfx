@@ -54,7 +54,7 @@ public class Player extends AnimateEntity {
 		position.setY(position.getY() + speed * listener.getVerticalMult());
 		mousePos = listener.getMousePos();
 		if (listener.getMouseDown())
-			weapon.action();
+			weapon.animation();
 	}
 
 	@Override

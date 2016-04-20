@@ -37,7 +37,7 @@ public class Sword2 extends Entity implements Weapon {
 		return RANGE;
 	}
 	
-	public void action() {
+	public void animation() {
 		if (!cooldown()) {
 			activeAnimation = true;
 			lastAnimationTime = System.currentTimeMillis();

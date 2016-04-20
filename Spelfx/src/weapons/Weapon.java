@@ -12,7 +12,7 @@ public interface Weapon {
 	
 	public void hit();
 	
-	public void action();
+	public void animation();
 	
 	public void paint(GraphicsContext gc);
 }
