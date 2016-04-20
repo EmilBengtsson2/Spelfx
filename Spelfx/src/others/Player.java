@@ -1,9 +1,12 @@
 package others;
 
 import entities.AnimateEntity;
+import entities.Entity;
 import framework.PlayerListener;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import objects.Block;
+import objects.EventBlock;
 import weapons.Weapon;
 
 public class Player extends AnimateEntity {
@@ -55,6 +58,21 @@ public class Player extends AnimateEntity {
 		mousePos = listener.getMousePos();
 		if (listener.getMouseDown())
 			weapon.animation();
+	}
+	
+	public void handleObjectCollision(Position oldPosition) {		
+		Entity entity =getIntersectingObject();
+		if (entity!=null) {
+			if (entity instanceof Block) {
+				Block block = (Block) entity;
+				if(block.isSolid()) {
+					position.setX(oldPosition.getX());
+					position.setY(oldPosition.getY());
+				} else if (block instanceof EventBlock) {
+					block.event();
+				}
+			}			
+		}
 	}
 
 	@Override

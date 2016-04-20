@@ -28,12 +28,13 @@ public class EntityController {
 	}
 
 	public void paintEntity(GraphicsContext gc) {		
-		for (AnimateEntity e : allEntities) {
-			e.paint(gc);
-		}
 		for (Entity i : getObjects()) {
 			i.paint(gc);
 		}
+		for (AnimateEntity e : allEntities) {
+			e.paint(gc);
+		}
+		
 	}
 
 	// Returns all enemies who got hit by the weapon (intersected the arc)

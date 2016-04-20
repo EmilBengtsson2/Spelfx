@@ -3,7 +3,10 @@ import enemies.HappyArrow;
 import enemies.HatEnemy;
 import enemies.RedSkull;
 import framework.PlayerListener;
-import weapons.Spear;	
+import objects.EventBlock;
+import objects.WallBlock;
+import weapons.Spear;
+import weapons.Sword2;	
 
 public class LevelGenerator {
 	
@@ -18,8 +21,8 @@ public class LevelGenerator {
 	
 	private static void level1(World world, PlayerListener listener) {
 		Player player = new Player(4, 600, 450, listener, world);
-		player.setWeapon(new Spear(player, world.getEntityController())); //Här byter man vapen
-		//player.setWeapon(new Sword2(player));
+		//player.setWeapon(new Spear(player, world.getEntityController())); //Här byter man vapen
+		player.setWeapon(new Sword2(player));
 		world.getAnimateEntities().add(player);
 
 		// Enemy 1
@@ -38,11 +41,12 @@ public class LevelGenerator {
 		int startX = 63;		
 		int startY = 59;
 		for (int i = 1; i < 30; i++) {
-			world.getObjects().add(new Block(startX*i, 0, world));		
-			world.getObjects().add(new Block(0, startY*i, world));
-			world.getObjects().add(new Block(startX*i, 1000, world));
-			world.getObjects().add(new Block(1500, startY*i, world));
+			world.getObjects().add(new WallBlock(startX*i, 0, world));		
+			world.getObjects().add(new WallBlock(0, startY*i, world));
+			world.getObjects().add(new WallBlock(startX*i, 1000, world));
+			world.getObjects().add(new WallBlock(1500, startY*i, world));
 		}
+		world.getObjects().add(new EventBlock (800,800, world));
 		
 		
 	}

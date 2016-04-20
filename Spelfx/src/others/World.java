@@ -10,6 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 public class World {
 
 	private EntityController entityController;
+	private boolean victory;
 
 	public World(PlayerListener listener) {
 		entityController = new EntityController(listener);
@@ -18,6 +19,7 @@ public class World {
 
 	public void updateWorld() {
 		entityController.updateEntity();
+		checkWin();
 	}
 
 	public void createWorld(PlayerListener listener) {
@@ -26,8 +28,18 @@ public class World {
 
 	public void paintWorld(GraphicsContext gc) {
 		entityController.paintEntity(gc);
+	}	
+	
+	public void setVictory(Boolean win) {
+		victory = win;
 	}
 	
+	public void checkWin() {
+		if (victory) {
+			System.out.println("Du vann");
+			System.exit(0);
+		}
+	}
 
 	public EntityController getEntityController() {
 		return entityController;

@@ -1,6 +1,7 @@
 package entities;
 
 import javafx.scene.canvas.GraphicsContext;
+import objects.Block;
 import others.Position;
 import others.World;
 
@@ -19,8 +20,13 @@ public abstract class AnimateEntity extends Entity{
 	public void handleObjectCollision(Position oldPosition) {
 		Entity entity =getIntersectingObject();
 		if (entity!=null) {
-			position.setX(oldPosition.getX());
-			position.setY(oldPosition.getY());			
+			if (entity instanceof Block) {
+				Block block = (Block) entity;
+				if(block.isSolid()) {
+					position.setX(oldPosition.getX());
+					position.setY(oldPosition.getY());
+				}				
+			}			
 		}
 	}
 	
