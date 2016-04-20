@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import entities.AnimateEntity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import others.EntityController;
 import others.Player;
 import others.Position;
@@ -41,12 +42,13 @@ public class Sword implements Weapon {
 		
 	@Override
 	public void hit() {
-		Arc2D.Double arc = new Arc2D.Double(player.getPosition().getX()-(RANGE + 15), player.getPosition().getY()-(RANGE + 15), (RANGE + 15) * 2, (RANGE + 15) * 2, Math.toDegrees(-Math.PI/3 + Math.PI/2 - player.getRotation()), Math.toDegrees(Math.PI/3 * 2), Arc2D.PIE);
+		Arc2D.Double arc = new Arc2D.Double(player.getPosition().getX()+player.getWidth()/2-(145), player.getPosition().getY()+player.getHeight()/2-(145), (145) * 2, (145) * 2, Math.toDegrees(-Math.PI/3 + Math.PI/2 - player.getRotation()), Math.toDegrees(Math.PI/3 * 2), Arc2D.PIE);
 		ArrayList<AnimateEntity> entities = entity.getMeleeHits(arc);
 		for(AnimateEntity ae : entities) {
 			System.out.println("Träff på: (" + ae.getPosition().getX() + ", " + ae.getPosition().getY() + ")");
 		}
-		System.out.println("-----------------------------------------------------------------------");
+		if(entities.size() > 0)
+			System.out.println("-----------------------------------------------------------------------");
 	}
 	
 	@Override
@@ -62,11 +64,11 @@ public class Sword implements Weapon {
 			}
 			if(animation > 0) {
 				theta += dTheta;
-				xDislocation += 1;
+				xDislocation += 7;
 				animation++;
 			} else {
 				theta -= dTheta;
-				xDislocation -= 1;
+				xDislocation -= 7;
 				animation--;
 			}
 			
@@ -83,12 +85,12 @@ public class Sword implements Weapon {
 			animation();
 		
 		gc.setFill(Color.DIMGRAY);
-		gc.translate(p.getX()+xDislocation+5, p.getY()-20);
+		gc.translate(p.getX()+xDislocation+10, p.getY());
 		gc.rotate(Math.toDegrees(theta));
-		gc.translate(-(p.getX()+xDislocation+5), -(p.getY()-20));
-		gc.fillRect((int)p.getX()+xDislocation, (int)p.getY()-20-RANGE, 10, RANGE);
-		gc.translate(p.getX()+xDislocation+5, p.getY()-20);
+		gc.translate(-(p.getX()+xDislocation+10), -(p.getY()));
+		gc.fillRect((int)p.getX()+xDislocation + 5, (int)p.getY()-RANGE, 10, RANGE);
+		gc.translate(p.getX()+xDislocation+10, p.getY());
 		gc.rotate(Math.toDegrees(-theta));
-		gc.translate(-(p.getX()+xDislocation+5), -(p.getY()-20));
+		gc.translate(-(p.getX()+xDislocation+10), -(p.getY()));
 	}
 }

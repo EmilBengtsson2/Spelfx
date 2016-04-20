@@ -40,12 +40,12 @@ public class Spear implements Weapon{
 		
 	@Override
 	public void hit() {
-		Arc2D.Double arc = new Arc2D.Double(player.getPosition().getX()-(RANGE + 15), player.getPosition().getY()-(RANGE + 15), (RANGE + 15) * 2, (RANGE + 15) * 2, Math.toDegrees(-Math.PI/3 + Math.PI/2 - player.getRotation()), Math.toDegrees(Math.PI/3 * 2), Arc2D.PIE);
-		ArrayList<AnimateEntity> entities = entity.getMeleeHits(arc);
+		Arc2D.Double arc = new Arc2D.Double(player.getPosition().getX()+player.getWidth()/2-(170), player.getPosition().getY()+player.getHeight()/2-(170), (170) * 2, (170) * 2, Math.toDegrees(-Math.PI/3 + Math.PI/2 - player.getRotation()), Math.toDegrees(Math.PI/3 * 2), Arc2D.PIE);		ArrayList<AnimateEntity> entities = entity.getMeleeHits(arc);
 		for(AnimateEntity ae : entities) {
 			System.out.println("Träff på: (" + ae.getPosition().getX() + ", " + ae.getPosition().getY() + ")");
 		}
-		System.out.println("-----------------------------------------------------------------------");
+		if(entities.size() > 0)
+			System.out.println("-----------------------------------------------------------------------");
 	}
 	
 	@Override //Måste ändra, har samma animation som svärdet nu.
@@ -61,11 +61,11 @@ public class Spear implements Weapon{
 			}
 			if(animation > 0) {
 				theta += dTheta;
-				xDislocation += 1;
+				xDislocation += 7;
 				animation++;
 			} else {
 				theta -= dTheta;
-				xDislocation -= 1;
+				xDislocation -= 7;
 				animation--;
 			}
 			
@@ -82,22 +82,22 @@ public class Spear implements Weapon{
 			animation();
 		
 		gc.setFill(Color.SANDYBROWN);
-		gc.translate(p.getX()+xDislocation+5, p.getY()-20);
+		gc.translate(p.getX()+xDislocation+10, p.getY());
 		gc.rotate(Math.toDegrees(theta));
-		gc.translate(-(p.getX()+xDislocation+5), -(p.getY()-20));
-		gc.fillRect((int)p.getX()+xDislocation, (int)p.getY()-20-RANGE, 10, RANGE);
+		gc.translate(-(p.getX()+xDislocation+10), -(p.getY()));
+		gc.fillRect((int)p.getX()+xDislocation+5, (int)p.getY()-RANGE, 10, RANGE);
 		
 		double[] x = new double[3];
 		double[] y = new double[3];
-		x[0]=(int)p.getX()+ xDislocation +12+6; x[1]=(int)p.getX()+ xDislocation+6; x[2]=(int)p.getX()+ xDislocation-12+6;
+		x[0]=(int)p.getX()+ xDislocation +12+4+6; x[1]=(int)p.getX()+ xDislocation+6+4; x[2]=(int)p.getX()+ xDislocation-12+4+6;
 		y[0]=(int)p.getY()-20-RANGE+10; y[1]=(int)p.getY()-20-RANGE-10; y[2]=(int)p.getY()-20-RANGE+10;
 		int n = 3;
 		gc.fillPolygon(x, y, n);
 		gc.setFill(Color.DARKGRAY);
-		gc.fillRect((int)p.getX()+xDislocation, (int)p.getY()-10-RANGE, 10, RANGE);
-		gc.translate(p.getX()+xDislocation+5, p.getY()-20);
+		gc.fillRect((int)p.getX()+xDislocation+5, (int)p.getY()-10-RANGE, 10, RANGE);
+		gc.translate(p.getX()+xDislocation+10, p.getY());
 		gc.rotate(Math.toDegrees(-theta));
-		gc.translate(-(p.getX()+xDislocation+5), -(p.getY()-20));
+		gc.translate(-(p.getX()+xDislocation+10), -(p.getY()));
 	}
 
 }

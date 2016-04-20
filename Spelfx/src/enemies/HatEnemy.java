@@ -8,6 +8,7 @@ import entities.AnimateEntity;
 import entities.HostileEntity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import others.Player;
 import others.World;
 
@@ -16,7 +17,7 @@ public class HatEnemy extends HostileEntity {
 	private static Image image = new Image("/PicResource/HatEnemy.gif");
 
 	private Player player;
-	private final static double SPEED = 0.7;
+	private final static double SPEED = 2.0;
 	
 
 	public HatEnemy(int x, int y, Player player, World world) {
@@ -48,7 +49,7 @@ public class HatEnemy extends HostileEntity {
 	//Kollar om en kon skär gubbens hitbox
 	@Override
 	public AnimateEntity checkArcIntersection(Arc2D.Double arc) {
-		if(arc.intersects(new Rectangle2D.Double(position.getX()-15, position.getY()+10, 30, 90)))
+		if(arc.intersects(new Rectangle2D.Double(position.getX()+15, position.getY()+5, 70, 110)))
 			return this;
 		return null;
 	}
@@ -56,6 +57,8 @@ public class HatEnemy extends HostileEntity {
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.drawImage(image, (int)position.getX(), (int)position.getY());
+		gc.setStroke(Color.RED);
+		gc.strokeRect(position.getX()+15, position.getY()+5, 70, 110);
 	}
 	
 	

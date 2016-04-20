@@ -1,8 +1,8 @@
 package enemies;
 
+import entities.RandomMover;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import others.RandomMover;
 import others.World;
 
 public class HappyArrow extends RandomMover{
