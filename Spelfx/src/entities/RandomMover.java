@@ -1,9 +1,8 @@
-package others;
+package entities;
 import java.awt.geom.Arc2D.Double;
 import java.util.Random;
 
-import entities.AnimateEntity;
-import entities.HostileEntity;
+import others.World;
 
 public abstract class RandomMover extends HostileEntity{
 	

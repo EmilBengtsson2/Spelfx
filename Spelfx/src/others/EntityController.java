@@ -7,6 +7,8 @@ import entities.Entity;
 import entities.HostileEntity;
 import framework.PlayerListener;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 
 public class EntityController {
 
@@ -47,6 +49,8 @@ public class EntityController {
 				}
 				gc.translate(tX, tY);
 				listener.setTranslatedXY(tX, tY);
+				gc.setFill(Color.INDIGO);
+				gc.fillArc(e.getPosition().getX()+e.getWidth()/2-(170), e.getPosition().getY()+e.getHeight()/2-(170), (170) * 2, (170) * 2, Math.toDegrees(-Math.PI/3 + Math.PI/2 - ((Player) e).getRotation()), Math.toDegrees(Math.PI/3 * 2), ArcType.ROUND);
 				break;
 			}
 		}
@@ -55,7 +59,6 @@ public class EntityController {
 		}
 		for (Entity i : getObjects()) {
 			i.paint(gc);
-
 		}
 	}
 

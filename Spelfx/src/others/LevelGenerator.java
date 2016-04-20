@@ -3,6 +3,7 @@ import enemies.HappyArrow;
 import enemies.HatEnemy;
 import enemies.RedSkull;
 import framework.PlayerListener;
+import weapons.Spear;
 import weapons.Sword;
 
 public class LevelGenerator {
@@ -17,8 +18,8 @@ public class LevelGenerator {
 	}
 	
 	private static void level1(World world, PlayerListener listener) {
-		Player player = new Player(1.5, 600, 450, listener, world);
-		player.setWeapon(new Sword(player, world.getEntityController())); //Här byter man vapen
+		Player player = new Player(4, 600, 450, listener, world);
+		player.setWeapon(new Spear(player, world.getEntityController())); //Här byter man vapen
 		world.getAnimateEntities().add(player);
 
 		// Enemy 1
@@ -42,7 +43,5 @@ public class LevelGenerator {
 			world.getObjects().add(new Block(startX*i, 1000, world));
 			world.getObjects().add(new Block(1500, startY*i, world));
 		}
-		
-		
 	}
 }

@@ -4,6 +4,7 @@ import entities.AnimateEntity;
 import framework.PlayerListener;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.ArcType;
 import weapons.Weapon;
 
 public class Player extends AnimateEntity {
@@ -46,6 +47,14 @@ public class Player extends AnimateEntity {
 		return rotation;
 	}
 	
+	public double getWidth() {
+		return image.getWidth();
+	}
+	
+	public double getHeight() {
+		return image.getHeight();
+	}
+	
 	@Override
 	public void action() {
 		
@@ -56,6 +65,7 @@ public class Player extends AnimateEntity {
 			weapon.Animation();
 
 	}
+	
 	@Override
 	public void paint(GraphicsContext gc) {
 		double x = position.getX() + (getWidth()/2);

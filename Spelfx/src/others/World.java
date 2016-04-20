@@ -22,7 +22,6 @@ public class World {
 
 	public void createWorld(PlayerListener listener) {
 		LevelGenerator.generateLevel(this, listener, 1);
-
 	}
 
 	public void paintWorld(GraphicsContext gc) {
