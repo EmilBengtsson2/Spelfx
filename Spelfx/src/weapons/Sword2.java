@@ -31,7 +31,7 @@ public class Sword2 extends Entity implements Weapon {
 	public int getDamage() {	
 		return BASE_DAMAGE;
 	}
-	//sword2förändring
+	
 	@Override
 	public int getRange() {	
 		return RANGE;
