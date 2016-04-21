@@ -159,9 +159,13 @@ public class Player extends AnimateEntity {
 		playerPosY = getPosition().getY();
 		if (playerPosX > 600 && playerPosX < 1800) {
 			tX = (int) -(playerPosX - 600);
+		} else if (playerPosX >= 1800) {
+			tX = (int) -(1800 - 600);
 		}
 		if (playerPosY > 450 && playerPosY < 1350) {
 			tY = (int) -(playerPosY - 450);
+		} else if (playerPosY >= 1350) {
+			tY = (int) -(1350 - 450);
 		}
 		gc.translate(tX, tY);
 		listener.setTranslatedXY(tX, tY);
