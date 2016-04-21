@@ -31,7 +31,7 @@ public class LevelGenerator {
 		
 
 		// RandomMovers
-		RedSkull rs = new RedSkull(400, 800, world);
+		RedSkull rs = new RedSkull(400, 800);
 		HappyArrow happy = new HappyArrow(300,300);
 		
 		world.getAnimateEntities().add(rs);
