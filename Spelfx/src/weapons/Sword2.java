@@ -11,10 +11,10 @@ import others.Player;
 import others.Position;
 
 public class Sword2 extends Entity implements Weapon {
-	private static Image image = new Image("/PicResource/Sword.png");
+	private static Image image = new Image("/PicResource/Sword.gif");
 	private final int RANGE = (int) image.getHeight(), BASE_DAMAGE = 20, BASE_COOLDOWN = 800;	
 	private double theta;
-	private final double dTheta = Math.PI /20;
+	private final double dTheta = Math.PI /10;
 	private Player player;
 	private boolean activeAnimation;	
 	private double leftmostAngle =-Math.PI/3, rightmostAngle = Math.PI/3;	
@@ -22,7 +22,7 @@ public class Sword2 extends Entity implements Weapon {
 	private double lastAnimationTime;
 
 	public Sword2(Player player) {
-		super((int)player.getPosition().getX(), (int)player.getPosition().getY(), player.getWorld(), image.getWidth(), image.getHeight());		
+		super((int)player.getPosition().getX(), (int)player.getPosition().getY(), image.getWidth(), image.getHeight());		
 		this.player = player;		
 		theta = -Math.PI/3;
 	}
@@ -51,7 +51,7 @@ public class Sword2 extends Entity implements Weapon {
 
 	@Override
 	public void hit() {
-		Arc2D.Double arc = new Arc2D.Double(player.getPosition().getX()-(RANGE + 15), player.getPosition().getY()-(RANGE + 15), (RANGE + 15) * 2, (RANGE + 15) * 2, Math.toDegrees(-Math.PI/3 + Math.PI/2 - player.getRotation()), Math.toDegrees(Math.PI/3 * 2), Arc2D.PIE);
+		Arc2D.Double arc = new Arc2D.Double(player.getPosition().getX()-(RANGE+15), player.getPosition().getY()-(RANGE+15), (RANGE+15) * 2, (RANGE+15) * 2, Math.toDegrees(-Math.PI/3 + Math.PI/2 - player.getRotation()), Math.toDegrees(Math.PI/3 * 2), Arc2D.PIE);
 		ArrayList<AnimateEntity> entities = getWorld().getEntityController().getMeleeHits(arc);
 		for(AnimateEntity ae : entities) {
 			System.out.println("Träff på: (" + ae.getPosition().getX() + ", " + ae.getPosition().getY() + ")" + ae.getClass());

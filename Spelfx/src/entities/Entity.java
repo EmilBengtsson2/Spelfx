@@ -2,19 +2,20 @@ package entities;
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
+import others.Player;
 import others.Position;
 import others.World;
 
 public abstract class Entity {			
 		
-		protected World world;
+		protected static World world;
+		protected static Player player;
 		protected Position position;
 		protected double width;
 		protected double height;
 		
-		public Entity(int x, int y, World world, double width, double height) {	
-			position = new Position(x, y);
-			this.world = world;
+		public Entity(int x, int y, double width, double height) {	
+			position = new Position(x, y);			
 			this.width = width;
 			this.height = height;			
 		}

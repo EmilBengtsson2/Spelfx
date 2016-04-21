@@ -17,9 +17,12 @@ public class Player extends AnimateEntity {
 	private Weapon weapon;
 	private double rotation;
 	private int tX, tY;
+	private final static double SPEED = 4.0;
 
-	public Player(double speed, int x, int y, PlayerListener listener, World world) {
-		super(speed, x, y, world, image.getWidth(), image.getHeight());
+	public Player(int x, int y, PlayerListener listener, World world) {
+		super(SPEED, x, y, image.getWidth(), image.getHeight());
+		setWorld(world);
+		setPlayer(this);
 		this.listener = listener;
 		mousePos = listener.getMousePos();
 		tX = tY = 0;
@@ -145,6 +148,12 @@ public class Player extends AnimateEntity {
 		}
 		gc.translate(tX, tY);
 		listener.setTranslatedXY(tX, tY);		
-
+	}
+	
+	private void setWorld(World world) {
+		Entity.world = world;
+	}
+	private void setPlayer(Player player) {
+		Entity.player = player;
 	}
 }

@@ -20,19 +20,19 @@ public class LevelGenerator {
 	}
 	
 	private static void level1(World world, PlayerListener listener) {
-		Player player = new Player(4, 600, 450, listener, world);
+		Player player = new Player(600, 450, listener, world);
 		//player.setWeapon(new Spear(player, world.getEntityController())); //Här byter man vapen
 		player.setWeapon(new Sword2(player));
 		world.getAnimateEntities().add(player);
 
 		// Enemy 1
-		HatEnemy enemy1 = new HatEnemy(600, 300, player, world);
+		HatEnemy enemy1 = new HatEnemy(600, 300, player);
 		world.getAnimateEntities().add(enemy1);
 		
 
 		// RandomMovers
 		RedSkull rs = new RedSkull(400, 800, world);
-		HappyArrow happy = new HappyArrow(300,300, world);
+		HappyArrow happy = new HappyArrow(300,300);
 		
 		world.getAnimateEntities().add(rs);
 		world.getAnimateEntities().add(happy);
@@ -41,12 +41,12 @@ public class LevelGenerator {
 		int startX = 63;		
 		int startY = 59;
 		for (int i = 1; i < 30; i++) {
-			world.getObjects().add(new WallBlock(startX*i, 0, world));		
-			world.getObjects().add(new WallBlock(0, startY*i, world));
-			world.getObjects().add(new WallBlock(startX*i, 1000, world));
-			world.getObjects().add(new WallBlock(1500, startY*i, world));
+			world.getObjects().add(new WallBlock(startX*i, 0));		
+			world.getObjects().add(new WallBlock(0, startY*i));
+			world.getObjects().add(new WallBlock(startX*i, 1000));
+			world.getObjects().add(new WallBlock(1500, startY*i));
 		}
-		world.getObjects().add(new EventBlock (800,800, world));
+		world.getObjects().add(new EventBlock (800,800));
 		
 		
 	}

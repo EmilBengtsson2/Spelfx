@@ -9,8 +9,8 @@ public class HappyArrow extends RandomMover{
 	private static Image image = new Image("/PicResource/HappyArrow.gif");
 	private final static double SPEED = 1.0;
 	
-	public HappyArrow(int x, int y, World world) {
-		super(SPEED, x, y, world, image.getWidth(), image.getHeight());
+	public HappyArrow(int x, int y) {
+		super(SPEED, x, y, image.getWidth(), image.getHeight());
 		
 	}
 	@Override

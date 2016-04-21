@@ -10,8 +10,8 @@ public abstract class RandomMover extends HostileEntity{
 	protected int movementCounter, xDirection, yDirection;	
 	
 
-	public RandomMover(double speed, int x, int y, World world, double d, double e) {
-		super(speed, x, y, world, d, e);		
+	public RandomMover(double speed, int x, int y, double width, double height) {
+		super(speed, x, y, width, height);		
 		rdm = new Random();
 		movementCounter = 0;			
 	}	

@@ -18,7 +18,7 @@ public class RedSkull extends RandomMover {
 	private int imageIndex;
 
 	public RedSkull(int x, int y, World world) {
-		super(SPEED, x, y, world, images[0].getWidth(), images[0].getHeight());
+		super(SPEED, x, y, images[0].getWidth(), images[0].getHeight());
 		animationCounter = 0;
 		imageIndex = 0;		
 	}

@@ -9,8 +9,8 @@ public class WallBlock extends Block {
 	
 	private static Image image = new Image("/PicResource/Block.png");
 	
-	public WallBlock(int x, int y, World world) {
-		super (x, y, world,image.getWidth(), image.getHeight());
+	public WallBlock(int x, int y) {
+		super (x, y, image.getWidth(), image.getHeight());
 		isSolid = true;
 		
 	}	

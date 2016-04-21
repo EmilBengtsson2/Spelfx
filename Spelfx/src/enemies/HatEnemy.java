@@ -20,8 +20,8 @@ public class HatEnemy extends HostileEntity {
 	private final static double SPEED = 2.0;
 	
 
-	public HatEnemy(int x, int y, Player player, World world) {
-		super(SPEED, x, y, world, image.getWidth(), image.getHeight());
+	public HatEnemy(int x, int y, Player player) {
+		super(SPEED, x, y, image.getWidth(), image.getHeight());
 		this.player = player;
 		new Random();
 		health = 2;		

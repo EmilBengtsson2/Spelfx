@@ -7,8 +7,8 @@ public abstract class Block extends Entity{
 	protected boolean isSolid;
 	protected boolean eventTriggered;
 
-	public Block(int x, int y, World world, double width, double height) {
-		super(x, y, world, width, height);
+	public Block(int x, int y, double width, double height) {
+		super(x, y, width, height);
 		
 	}
 	

@@ -8,8 +8,8 @@ public class EventBlock extends Block{
 	
 	private static Image image = new Image("/PicResource/EventBlock.png");
 
-	public EventBlock(int x, int y, World world) {
-		super(x, y, world, image.getWidth(), image.getHeight());
+	public EventBlock(int x, int y) {
+		super(x, y, image.getWidth(), image.getHeight());
 		isSolid = false;
 	}
 
