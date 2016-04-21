@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import entities.AnimateEntity;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import others.EntityController;
 import others.Player;
@@ -12,6 +13,7 @@ import others.Position;
 
 public class Spear implements Weapon{
 	private Position p;
+	private static Image image = new Image("/PicResource/Spear.png");
 	private final int RANGE = 105, BASE_DAMAGE = 20, BASE_COOLDOWN = 500;
 	private long lastAnimationTime;
 	private int animation, xDislocation;
@@ -85,16 +87,9 @@ public class Spear implements Weapon{
 		gc.translate(p.getX()+xDislocation+10, p.getY());
 		gc.rotate(Math.toDegrees(theta));
 		gc.translate(-(p.getX()+xDislocation+10), -(p.getY()));
-		gc.fillRect((int)p.getX()+xDislocation+5, (int)p.getY()-RANGE, 10, RANGE);
 		
-		double[] x = new double[3];
-		double[] y = new double[3];
-		x[0]=(int)p.getX()+ xDislocation +12+4+6; x[1]=(int)p.getX()+ xDislocation+6+4; x[2]=(int)p.getX()+ xDislocation-12+4+6;
-		y[0]=(int)p.getY()-20-RANGE+10; y[1]=(int)p.getY()-20-RANGE-10; y[2]=(int)p.getY()-20-RANGE+10;
-		int n = 3;
-		gc.fillPolygon(x, y, n);
-		gc.setFill(Color.DARKGRAY);
-		gc.fillRect((int)p.getX()+xDislocation+5, (int)p.getY()-10-RANGE, 10, RANGE);
+		gc.drawImage(image, (int)p.getX()+xDislocation, (int)p.getY()-30-RANGE);
+		
 		gc.translate(p.getX()+xDislocation+10, p.getY());
 		gc.rotate(Math.toDegrees(-theta));
 		gc.translate(-(p.getX()+xDislocation+10), -(p.getY()));
