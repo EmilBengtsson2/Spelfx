@@ -7,11 +7,13 @@ public class Engine {
 	
 	private Display display;
 	private World world;
+	private Ram ram;
 
 	private PlayerListener listener;
 	
-	public Engine (Display display) {
+	public Engine (Display display, Ram ram) {
 		this.display = display;
+		this.ram = ram;
 		listener = new PlayerListener(this, display.getCanvas());
 		world = new World(listener);
 	}
@@ -34,6 +36,7 @@ public class Engine {
 	
 	//Fullskärm (typ)
 	public void setFullscreen(boolean fullscreen) {
+		ram.getPrimaryStage().setFullScreen(fullscreen);
 		/*ram.setFullscreen(fullscreen);
 		display.resize((Toolkit.getDefaultToolkit().getScreenSize()));*/
 	}

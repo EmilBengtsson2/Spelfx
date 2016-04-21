@@ -10,6 +10,7 @@ import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 
 public class Ram extends Application {
+	private Stage primaryStage;
 	//Kom gärna på ett bättre namn
 	//JFrame är typ som stage i javafx (tror jag)
 	
@@ -17,18 +18,9 @@ public class Ram extends Application {
 	private Engine engine;
 	private GraphicsContext gc;
 	
-	private final int WIDTH = 1200, HEIGHT = 900;
+	private final int WIDTH = 1200, HEIGHT = 900;	
 	
-	//Fullskärm (typ)
-	public void setFullscreen(boolean fullscreen) {
-		/*if(fullscreen) {
-			this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		} else {
-			display.setSize(WIDTH, HEIGHT);
-			this.pack();
-			this.setLocationRelativeTo(null);
-		}*/
-	}
+	
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -37,13 +29,14 @@ public class Ram extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//"Målarduken"
-		display = new Display(WIDTH*2, HEIGHT*2);
+		this.primaryStage = primaryStage;
+		display = new Display(WIDTH*2, HEIGHT*2);		
 		gc = display.getCanvas().getGraphicsContext2D();
 		gc.setFill(Color.CORAL);
-		gc.fillRect(0, 0, WIDTH*2, HEIGHT*2);
+		gc.fillRect(0, 0, WIDTH*2, HEIGHT*2);		
 		
 		//I denna klassen finns "gameloopen"
-		engine = new Engine(display);
+		engine = new Engine(display, this);
 		
 		primaryStage.setTitle("Fönstrets namn");
 		
@@ -60,6 +53,10 @@ public class Ram extends Application {
 		primaryStage.show();
 		
 		engine.start();
+	}
+	
+	public Stage getPrimaryStage() {
+		return primaryStage;
 	}
 
 }
