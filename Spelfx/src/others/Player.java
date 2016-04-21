@@ -27,7 +27,7 @@ public class Player extends AnimateEntity {
 		setStats(SPEED, HEALTH);
 		this.listener = listener;
 		mousePos = listener.getMousePos();
-		tX = tY = 0;		
+		tX = tY = 0;
 	}
 
 	public void setPosition(double x, double y) {
@@ -56,26 +56,42 @@ public class Player extends AnimateEntity {
 
 	@Override
 	public void action() {
-
 		position.setX(position.getX() + speed * listener.getHorizontalMult());
+		collisionHandling('x');
+
 		position.setY(position.getY() + speed * listener.getVerticalMult());
+		collisionHandling('y');
+
 		mousePos = listener.getMousePos();
 		if (listener.getMouseDown())
 			weapon.animation();
 	}
-	
-	public void handleObjectCollision(Position oldPosition) {		
-		Entity entity =getIntersectingObject();
-		if (entity!=null) {
-			if (entity instanceof Block) {
-				Block block = (Block) entity;
-				if(block.isSolid()) {
-					position.setX(oldPosition.getX());
-					position.setY(oldPosition.getY());
-				} else if (block instanceof EventBlock && !block.getEventStatus()) {
-					block.event();
+
+	protected void collisionHandling(char XorY) {
+		if (XorY == 'x') {
+			Entity entity = getIntersectingObject();
+			if (entity != null)
+				if (entity instanceof Block) {
+					if (((Block) entity).isSolid())
+						position.setX(position.getX() - speed * listener.getHorizontalMult());
+					else if(entity instanceof EventBlock && !((Block) entity).getEventStatus())
+						((Block) entity).event();
 				}
-			}			
+			entity = getIntersectingEntity();
+			if (entity != null)
+				position.setX(position.getX() - speed * listener.getHorizontalMult());
+		} else if (XorY == 'y') {
+			Entity entity = getIntersectingObject();
+			if (entity != null)
+				if (entity instanceof Block) {
+					if (((Block) entity).isSolid())
+						position.setY(position.getY() - speed * listener.getVerticalMult());
+					else if(entity instanceof EventBlock && !((Block) entity).getEventStatus())
+						((Block) entity).event();
+				}
+			entity = getIntersectingEntity();
+			if (entity != null)
+				position.setY(position.getY() - speed * listener.getVerticalMult());
 		}
 	}
 
@@ -148,12 +164,13 @@ public class Player extends AnimateEntity {
 			tY = (int) -(playerPosY - 450);
 		}
 		gc.translate(tX, tY);
-		listener.setTranslatedXY(tX, tY);		
+		listener.setTranslatedXY(tX, tY);
 	}
-	
+
 	private void setWorld(World world) {
 		Entity.world = world;
 	}
+
 	private void setPlayer(Player player) {
 		Entity.player = player;
 	}

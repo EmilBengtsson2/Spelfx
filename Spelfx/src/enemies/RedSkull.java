@@ -4,10 +4,11 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.Arc2D.Double;
 
 import entities.AnimateEntity;
+import entities.Entity;
 import entities.RandomMover;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import others.World;
+import objects.Block;
 
 public class RedSkull extends RandomMover {
 	private static Image[] images = { new Image("/PicResource/RedSkull1.png"), new Image("/PicResource/RedSkull2.png"),
@@ -31,11 +32,36 @@ public class RedSkull extends RandomMover {
 			movementCounter = 100;
 		}
 		position.setX(position.getX() + xDirection * speed);
+		collisionHandling('x');
 		position.setY(position.getY() + yDirection * speed);
+		collisionHandling('y');
 		movementCounter--;
 
 	}
-
+	
+	@Override
+	protected void collisionHandling(char XorY) {
+		if (XorY == 'x') {
+			Entity entity = getIntersectingObject();
+			if (entity != null)
+				if (entity instanceof Block)
+					if (((Block) entity).isSolid())
+						position.setX(position.getX() - speed * xDirection);
+			entity = getIntersectingEntity();
+			if (entity != null)
+				position.setX(position.getX() - speed * xDirection);
+		} else if (XorY == 'y') {
+			Entity entity = getIntersectingObject();
+			if (entity != null)
+				if (entity instanceof Block)
+					if (((Block) entity).isSolid())
+						position.setY(position.getY() - speed * yDirection);
+			entity = getIntersectingEntity();
+			if (entity != null)
+				position.setY(position.getY() - speed * yDirection);
+		}
+	}
+	
 	@Override
 	public void paint(GraphicsContext gc) {
 		switchImage();

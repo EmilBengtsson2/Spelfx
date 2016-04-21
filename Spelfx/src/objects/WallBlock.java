@@ -1,9 +1,7 @@
 package objects;
 
-import entities.Entity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import others.World;
 
 public class WallBlock extends Block {
 	

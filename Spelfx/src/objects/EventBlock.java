@@ -2,7 +2,6 @@ package objects;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import others.World;
 
 public class EventBlock extends Block{
 	

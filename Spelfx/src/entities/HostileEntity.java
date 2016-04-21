@@ -2,7 +2,6 @@ package entities;
 import java.awt.geom.Arc2D.Double;
 
 import javafx.scene.canvas.GraphicsContext;
-import others.World;
 
 public abstract class HostileEntity extends AnimateEntity{
 
