@@ -33,8 +33,7 @@ public class EntityController {
 		}
 		for (AnimateEntity e : allEntities) {
 			e.paint(gc);
-		}
-		
+		}		
 	}
 
 	// Returns all enemies who got hit by the weapon (intersected the arc)

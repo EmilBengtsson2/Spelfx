@@ -10,9 +10,8 @@ public abstract class AnimateEntity extends Entity{
 	protected double speed;
 	protected int health;
 	
-	public AnimateEntity(double speed, int x, int y, double width, double height) {
-		super(x, y, width, height);
-		this.speed = speed;
+	public AnimateEntity(int x, int y, double width, double height) {
+		super(x, y, width, height);		
 	}	
 	
 	public abstract void action();
@@ -36,6 +35,18 @@ public abstract class AnimateEntity extends Entity{
 			position.setX(oldPosition.getX());
 			position.setY(oldPosition.getY());			
 		}
+	}
+	
+	public void takeDamage(int damage) {
+		health = health - damage;
+		if (health <=0) {
+			world.getAnimateEntities().remove(this);
+		}
+	}
+	
+	public void setStats(double speed, int health) {
+		this.speed = speed;
+		this.health = health;
 	}
 	
 	public abstract void paint(GraphicsContext gc);	

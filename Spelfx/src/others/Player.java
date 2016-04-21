@@ -18,15 +18,16 @@ public class Player extends AnimateEntity {
 	private double rotation;
 	private int tX, tY;
 	private final static double SPEED = 4.0;
+	private final static int HEALTH = 20;
 
 	public Player(int x, int y, PlayerListener listener, World world) {
-		super(SPEED, x, y, image.getWidth(), image.getHeight());
+		super(x, y, image.getWidth(), image.getHeight());
 		setWorld(world);
 		setPlayer(this);
+		setStats(SPEED, HEALTH);
 		this.listener = listener;
 		mousePos = listener.getMousePos();
-		tX = tY = 0;
-		health = 5;
+		tX = tY = 0;		
 	}
 
 	public void setPosition(double x, double y) {

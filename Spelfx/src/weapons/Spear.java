@@ -42,6 +42,7 @@ public class Spear implements Weapon{
 	public void hit() {
 		Arc2D.Double arc = new Arc2D.Double(player.getPosition().getX()+player.getWidth()/2-(170), player.getPosition().getY()+player.getHeight()/2-(170), (170) * 2, (170) * 2, Math.toDegrees(-Math.PI/3 + Math.PI/2 - player.getRotation()), Math.toDegrees(Math.PI/3 * 2), Arc2D.PIE);		ArrayList<AnimateEntity> entities = entity.getMeleeHits(arc);
 		for(AnimateEntity ae : entities) {
+			ae.takeDamage(BASE_DAMAGE);
 			System.out.println("Träff på: (" + ae.getPosition().getX() + ", " + ae.getPosition().getY() + ")");
 		}
 		if(entities.size() > 0)

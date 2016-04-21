@@ -21,12 +21,12 @@ public class LevelGenerator {
 	
 	private static void level1(World world, PlayerListener listener) {
 		Player player = new Player(600, 450, listener, world);
-		//player.setWeapon(new Spear(player, world.getEntityController())); //Här byter man vapen
-		player.setWeapon(new Sword2(player));
+		player.setWeapon(new Spear(player, world.getEntityController())); //Här byter man vapen
+		//player.setWeapon(new Sword2(player));
 		world.getAnimateEntities().add(player);
 
 		// Enemy 1
-		HatEnemy enemy1 = new HatEnemy(600, 300, player);
+		HatEnemy enemy1 = new HatEnemy(600, 300);
 		world.getAnimateEntities().add(enemy1);
 		
 

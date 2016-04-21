@@ -6,8 +6,8 @@ import others.World;
 
 public abstract class HostileEntity extends AnimateEntity{
 
-	public HostileEntity(double speed, int x, int y, double width, double height) {
-		super(speed, x, y, width, height);
+	public HostileEntity(int x, int y, double width, double height) {
+		super(x, y, width, height);
 	}
 
 

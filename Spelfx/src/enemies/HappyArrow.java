@@ -1,5 +1,9 @@
 package enemies;
 
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Arc2D.Double;
+
+import entities.AnimateEntity;
 import entities.RandomMover;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -8,9 +12,11 @@ import others.World;
 public class HappyArrow extends RandomMover{
 	private static Image image = new Image("/PicResource/HappyArrow.gif");
 	private final static double SPEED = 1.0;
+	private final static int HEALTH = 200;
 	
 	public HappyArrow(int x, int y) {
-		super(SPEED, x, y, image.getWidth(), image.getHeight());
+		super(x, y, image.getWidth(), image.getHeight());
+		setStats(SPEED, HEALTH);
 		
 	}
 	@Override
@@ -25,5 +31,12 @@ public class HappyArrow extends RandomMover{
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.drawImage(image, (int) position.getX(), (int) position.getY());
+	}
+	@Override
+	public AnimateEntity checkArcIntersection(Double arc) {
+		if(arc.intersects(new Rectangle2D.Double(position.getX(), position.getY(), image.getWidth(), image.getHeight()))) {
+			return this;	
+		}
+		return null;
 	}
 }

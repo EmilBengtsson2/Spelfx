@@ -15,16 +15,13 @@ import others.World;
 public class HatEnemy extends HostileEntity {	
 	
 	private static Image image = new Image("/PicResource/HatEnemy.gif");
-
-	private Player player;
-	private final static double SPEED = 2.0;
 	
+	private final static double SPEED = 2.0;
+	private final static int HEALTH = 100;
 
-	public HatEnemy(int x, int y, Player player) {
-		super(SPEED, x, y, image.getWidth(), image.getHeight());
-		this.player = player;
-		new Random();
-		health = 2;		
+	public HatEnemy(int x, int y) {
+		super(x, y, image.getWidth(), image.getHeight());				
+		setStats(SPEED, HEALTH);	
 	}
 
 	@Override

@@ -10,15 +10,11 @@ public abstract class RandomMover extends HostileEntity{
 	protected int movementCounter, xDirection, yDirection;	
 	
 
-	public RandomMover(double speed, int x, int y, double width, double height) {
-		super(speed, x, y, width, height);		
+	public RandomMover(int x, int y, double width, double height) {
+		super(x, y, width, height);		
 		rdm = new Random();
 		movementCounter = 0;			
 	}	
 	
-	public AnimateEntity checkArcIntersection(Double arc) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
