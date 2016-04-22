@@ -4,9 +4,12 @@ import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 
 import entities.AnimateEntity;
+import entities.Entity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import objects.Block;
+import objects.EventBlock;
 import others.EntityController;
 import others.Player;
 import others.Position;
@@ -94,4 +97,5 @@ public class Spear implements Weapon{
 		gc.rotate(Math.toDegrees(-theta));
 		gc.translate(-(p.getX()+xDislocation+10), -(p.getY()));
 	}
+		
 }
