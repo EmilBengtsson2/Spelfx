@@ -1,17 +1,29 @@
 package others;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+
+import javax.imageio.ImageIO;
+
 import entities.AnimateEntity;
 import entities.Entity;
 import framework.PlayerListener;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import objects.Block;
 import objects.EventBlock;
 import weapons.Weapon;
 
 public class Player extends AnimateEntity {
 
-	private static Image image = new Image("/PicResource/Player.gif");
+	// private static Image image = new Image("/PicResource/Player.gif");
+	private static BufferedImage image;
+	private Image[] images = new Image[5];
 	private PlayerListener listener;
 	private Position mousePos;
 	private Weapon weapon;
@@ -21,13 +33,31 @@ public class Player extends AnimateEntity {
 	private final static int HEALTH = 20;
 
 	public Player(int x, int y, PlayerListener listener, World world) {
-		super(x, y, image.getWidth(), image.getHeight());
+		super(x, y, 70, 50);
+		loadImages();
 		setWorld(world);
 		setPlayer(this);
 		setStats(SPEED, HEALTH);
 		this.listener = listener;
 		mousePos = listener.getMousePos();
 		tX = tY = 0;
+	}
+
+	private void loadImages() {
+		try {
+			image = ImageIO.read(getClass().getResource("/misterkenobi.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		WritableImage temp = null;
+		if (image != null) {
+			for (int i = 0; i < 3; i++) {
+				temp = SwingFXUtils.toFXImage(image.getSubimage(i * 71, 0, 70, 50), null);
+				images[i] = new ImageView(temp).getImage();
+			}
+			if(temp == null)
+				System.out.println("nisse");
+		}
 	}
 
 	public void setPosition(double x, double y) {
@@ -74,7 +104,7 @@ public class Player extends AnimateEntity {
 				if (entity instanceof Block) {
 					if (((Block) entity).isSolid())
 						position.setX(position.getX() - speed * listener.getHorizontalMult());
-					else if(entity instanceof EventBlock && !((Block) entity).getEventStatus())
+					else if (entity instanceof EventBlock && !((Block) entity).getEventStatus())
 						((Block) entity).event();
 				}
 			entity = getIntersectingEntity();
@@ -86,7 +116,7 @@ public class Player extends AnimateEntity {
 				if (entity instanceof Block) {
 					if (((Block) entity).isSolid())
 						position.setY(position.getY() - speed * listener.getVerticalMult());
-					else if(entity instanceof EventBlock && !((Block) entity).getEventStatus())
+					else if (entity instanceof EventBlock && !((Block) entity).getEventStatus())
 						((Block) entity).event();
 				}
 			entity = getIntersectingEntity();
@@ -144,7 +174,7 @@ public class Player extends AnimateEntity {
 
 		if (weapon != null)
 			weapon.paint(gc);
-		gc.drawImage(image, position.getX(), position.getY(), width, height);
+		gc.drawImage(images[0], position.getX(), position.getY(), width, height);
 
 		gc.translate(x, y);
 		gc.rotate(Math.toDegrees(-rotation));
