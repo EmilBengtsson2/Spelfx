@@ -38,10 +38,10 @@ public class LevelGenerator {
 		world.getAnimateEntities().add(happy);
 		
 		// Block, 63 pixels wide, height 59 atm.
-		int startX = 63;		
+		int startX = 63;
 		int startY = 59;
 		for (int i = 0; i <= 37; i++) {
-			world.getObjects().add(new WallBlock(startX*i, 0));		
+			world.getObjects().add(new WallBlock(startX*i, 0));
 			world.getObjects().add(new WallBlock(0, startY*i));
 			world.getObjects().add(new WallBlock(startX*i, 1800-87));
 			world.getObjects().add(new WallBlock(2400-69, startY*i));
