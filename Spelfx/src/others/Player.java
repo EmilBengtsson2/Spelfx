@@ -26,7 +26,7 @@ public class Player extends AnimateEntity {
 	private Weapon weapon;
 	private double rotation;
 	private int tX, tY;
-	private final static double SPEED = 4.0;
+	private final static double SPEED = 6.0;
 	private final static int HEALTH = 20;
 
 	public Player(int x, int y, PlayerListener listener, World world) {
