@@ -22,7 +22,7 @@ public class Sword2 extends Entity implements Weapon {
 	private double lastAnimationTime;
 
 	public Sword2(Player player) {
-		super((int)player.getPosition().getX(), (int)player.getPosition().getY(), image.getWidth(), image.getHeight());		
+		super((int)player.getPosition().getX(), (int)player.getPosition().getY(), image.getWidth(), image.getHeight(), player.getCenter());
 		this.player = player;		
 		theta = -Math.PI/3;
 	}

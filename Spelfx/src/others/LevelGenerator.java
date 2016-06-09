@@ -6,7 +6,6 @@ import framework.PlayerListener;
 import objects.EventBlock;
 import objects.WallBlock;
 import weapons.Spear;
-import weapons.Sword2;	
 
 public class LevelGenerator {
 	

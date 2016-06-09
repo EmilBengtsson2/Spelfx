@@ -1,10 +1,7 @@
 package others;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-
 import javax.imageio.ImageIO;
 
 import entities.AnimateEntity;
@@ -55,7 +52,7 @@ public class Player extends AnimateEntity {
 				temp = SwingFXUtils.toFXImage(image.getSubimage(i * 71, 0, 70, 50), null);
 				images[i] = new ImageView(temp).getImage();
 			}
-			if(temp == null)
+			if (temp == null)
 				System.out.println("nisse");
 		}
 	}
@@ -187,15 +184,15 @@ public class Player extends AnimateEntity {
 		tX = tY = 0;
 		playerPosX = getPosition().getX();
 		playerPosY = getPosition().getY();
-		if (playerPosX > 600 && playerPosX < 1800) {
-			tX = (int) -(playerPosX - 600);
-		} else if (playerPosX >= 1800) {
-			tX = (int) -(1800 - 600);
+		if (playerPosX > 600 - getWidth() / 2 && playerPosX < 1800 - getWidth() / 2) {
+			tX = (int) -(playerPosX - (600 - getWidth() / 2));
+		} else if (playerPosX >= 1800 - getWidth() / 2) {
+			tX = (int) -(1800 - getWidth() / 2 - (600 - getWidth() / 2));
 		}
-		if (playerPosY > 450 && playerPosY < 1350) {
-			tY = (int) -(playerPosY - 450);
-		} else if (playerPosY >= 1350) {
-			tY = (int) -(1350 - 450);
+		if (playerPosY > 450 - getHeight() / 2 && playerPosY < 1350 - getHeight() / 2) {
+			tY = (int) -(playerPosY - (450 - getHeight() / 2));
+		} else if (playerPosY >= 1350 - getHeight() / 2) {
+			tY = (int) -(1350 - getHeight() / 2 - (450 - getHeight() / 2));
 		}
 		gc.translate(tX, tY);
 		listener.setTranslatedXY(tX, tY);

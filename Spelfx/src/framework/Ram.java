@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import others.Player;
 
 public class Ram extends Application {
 	private Stage primaryStage;
@@ -66,18 +67,14 @@ public class Ram extends Application {
 		return primaryStage;
 	}
 
-	public void scaleFullscreen(boolean fullscreen) {
-		if (fullscreen) {
-			root.setTranslateX(WIDTH / 2 + 80);
-			root.setTranslateY(HEIGHT / 4 - 45);
-			root.setScaleX(primaryStage.getWidth() / WIDTH);
-			root.setScaleY(primaryStage.getHeight() / HEIGHT);
+	public void scaleFullscreen(boolean fullscreen, Player player) {
+		/*if (fullscreen) {	
+			root.setScaleX(Toolkit.getDefaultToolkit().getScreenSize().getWidth() / WIDTH);
+			root.setScaleY(Toolkit.getDefaultToolkit().getScreenSize().getHeight() / HEIGHT);
 		} else {
 			root.setScaleX(1);
 			root.setScaleY(1);
-			root.setTranslateX(WIDTH / 2 + 80);
-			root.setTranslateY(HEIGHT / 4 - 45);
-		}
+		}*/
 	}
 
 	private Button start() {

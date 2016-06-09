@@ -1,14 +1,17 @@
 package enemies;
 
-import java.awt.geom.Rectangle2D;
 import java.awt.geom.Arc2D.Double;
+import java.awt.geom.Rectangle2D;
 
 import entities.AnimateEntity;
 import entities.Entity;
 import entities.RandomMover;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import objects.Block;
+import others.Polygon;
+import others.Position;
 
 public class HappyArrow extends RandomMover{
 	private static Image image = new Image("/PicResource/HappyArrow.gif");
@@ -18,7 +21,19 @@ public class HappyArrow extends RandomMover{
 	public HappyArrow(int x, int y) {
 		super(x, y, image.getWidth(), image.getHeight());
 		setStats(SPEED, HEALTH);
-		
+		setHitbox();
+	}
+	
+	private void setHitbox() {
+		double tempX = position.getX(), tempY = position.getY();
+		Position[] temp = new Position[6];
+		temp[0] = new Position(tempX, tempY + height / 2);
+		temp[1] = new Position(tempX + 50, tempY);
+		temp[2] = new Position(tempX + width - 50, tempY);
+		temp[3] = new Position(tempX + width, tempY + height / 2);
+		temp[4] = new Position(tempX + width - 50, tempY + height);
+		temp[5] = new Position(tempX + 50, tempY + height);
+		hitbox = new Polygon(temp, center);
 	}
 	
 	@Override
@@ -28,6 +43,7 @@ public class HappyArrow extends RandomMover{
 			movementCounter = 150;
 		}
 		position.setX(position.getX() + xDirection * speed);
+		hitbox.move(xDirection * speed, 0);
 		collisionHandling('x');
 		
 		movementCounter--;		
@@ -39,17 +55,27 @@ public class HappyArrow extends RandomMover{
 			Entity entity = getIntersectingObject();
 			if (entity != null)
 				if (entity instanceof Block)
-					if (((Block) entity).isSolid())
+					if (((Block) entity).isSolid()) {
 						position.setX(position.getX() - xDirection * speed);
+						hitbox.move(-xDirection * speed, 0);
+					}
 			entity = getIntersectingEntity();
-			if (entity != null)
+			if (entity != null) {
 				position.setX(position.getX() - xDirection * speed);
+				hitbox.move(-xDirection * speed, 0);
+			}
 		}
 	}
 	
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.drawImage(image, (int) position.getX(), (int) position.getY());
+		drawHitbox(gc);
+	}
+	
+	private void drawHitbox(GraphicsContext gc) {
+		gc.setStroke(Color.ORANGERED);
+		gc.strokePolygon(hitbox.getXPoints(), hitbox.getYPoints(), 6);
 	}
 	
 	@Override

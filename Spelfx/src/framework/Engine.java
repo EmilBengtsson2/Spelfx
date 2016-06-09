@@ -37,7 +37,7 @@ public class Engine {
 	//Fullskärm (typ)
 	public void setFullscreen(boolean fullscreen) {
 		ram.getPrimaryStage().setFullScreen(fullscreen);
-		ram.scaleFullscreen(fullscreen);
+		ram.scaleFullscreen(fullscreen, world.getPlayer());
 		/*ram.setFullscreen(fullscreen);
 		display.resize((Toolkit.getDefaultToolkit().getScreenSize()));*/
 	}

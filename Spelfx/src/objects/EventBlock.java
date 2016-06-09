@@ -20,7 +20,6 @@ public class EventBlock extends Block{
 	@Override
 	public void event() {
 		world.setVictory(true);
-		
 	}
 
 }

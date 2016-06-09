@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 import others.Player;
+import others.Polygon;
 import others.Position;
 import others.World;
 
@@ -13,11 +14,28 @@ public abstract class Entity {
 		protected Position position;
 		protected double width;
 		protected double height;
+		protected Polygon hitbox;
+		protected Position center;
 		
-		public Entity(int x, int y, double width, double height) {	
+		public Entity(int x, int y, double width, double height, Position center) {	
 			position = new Position(x, y);			
 			this.width = width;
-			this.height = height;			
+			this.height = height;
+			this.center = center;
+			Position[] temp = new Position[4];
+			temp[0] = new Position(x, y);
+			temp[1] = new Position(x + width, y);
+			temp[2] = new Position(x + width, y + height);
+			temp[3] = new Position(x, y + height);
+			hitbox = new Polygon(temp, center);
+		}
+		
+		public Position getCenter() {
+			return center;
+		}
+		
+		public Polygon getHitbox() {
+			return hitbox;
 		}
 		
 		public Position getPosition() {

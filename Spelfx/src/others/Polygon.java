@@ -145,6 +145,13 @@ public class Polygon {
 		return points;
 	}
 	
+	public void move(double dX, double dY) {
+		for(Position p : points) {
+			p.setX(p.getX() + dX);
+			p.setY(p.getY() + dY);
+		}
+	}
+	
 	public double[] getXPoints() {
 		double[] xPoints = new double[points.length];
 		for(int i = 0; i < points.length; i++) {

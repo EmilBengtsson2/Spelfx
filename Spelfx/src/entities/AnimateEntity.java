@@ -1,6 +1,7 @@
 package entities;
 
 import javafx.scene.canvas.GraphicsContext;
+import others.Position;
 
 public abstract class AnimateEntity extends Entity{
 	
@@ -8,7 +9,7 @@ public abstract class AnimateEntity extends Entity{
 	protected int health;
 	
 	public AnimateEntity(int x, int y, double width, double height) {
-		super(x, y, width, height);		
+		super(x, y, width, height, new Position(x + width / 2, y + height / 2));
 	}	
 	
 	public abstract void action();

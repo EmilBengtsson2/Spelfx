@@ -53,4 +53,18 @@ public class World {
 		return entityController.getAnimateEntities();
 	}
 
+	/**
+	 * Returns the player if he exists, else null is returned
+	 * 
+	 * @return Player
+	 * @return null
+	 */
+	public Player getPlayer() {
+		for(AnimateEntity e : entityController.getAnimateEntities()) {
+			if(e instanceof Player)
+				return (Player) e;
+		}
+		return null;
+	}
+
 }
