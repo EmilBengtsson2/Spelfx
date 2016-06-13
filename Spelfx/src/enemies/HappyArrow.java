@@ -70,12 +70,7 @@ public class HappyArrow extends RandomMover{
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.drawImage(image, (int) position.getX(), (int) position.getY());
-		drawHitbox(gc);
-	}
-	
-	private void drawHitbox(GraphicsContext gc) {
-		gc.setStroke(Color.ORANGERED);
-		gc.strokePolygon(hitbox.getXPoints(), hitbox.getYPoints(), 6);
+		drawHitbox(gc, hitbox.getPoints().length);
 	}
 	
 	@Override

@@ -4,6 +4,7 @@ public class Polygon {
 
 	private Position[] points;
 	private Position center;
+	private double rotation;
 
 	/**
 	 * Put the points in order or expect a crash
@@ -13,6 +14,7 @@ public class Polygon {
 	 */
 	public Polygon(Position[] points, Position center) {
 		setPositions(points, center);
+		rotation = 0;
 	}
 	
 	private void setPositions(Position[] points, Position center) {
@@ -30,6 +32,9 @@ public class Polygon {
 	 * @param theta
 	 */
 	public void rotate(double theta) {
+		rotation += theta;
+		if(rotation / (2 * Math.PI) < 1)
+			rotation = rotation - 2 * Math.PI;
 		Position[] tempPoints = new Position[points.length];
 		double alpha;
 		for (int i = 0; i < points.length; i++) {
@@ -46,6 +51,14 @@ public class Polygon {
 							+ Math.pow(points[i].getY() - center.getY(), 2)));
 		}
 		points = tempPoints;
+	}
+	
+	/**
+	 * Returns the current rotation of the polygon in radians
+	 * @return double theta
+	 */
+	public double getRotation() {
+		return rotation;
 	}
 
 	/**
@@ -150,6 +163,8 @@ public class Polygon {
 			p.setX(p.getX() + dX);
 			p.setY(p.getY() + dY);
 		}
+		center.setX(center.getX() + dX);
+		center.setY(center.getY() + dY);
 	}
 	
 	public double[] getXPoints() {

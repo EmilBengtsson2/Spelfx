@@ -14,7 +14,8 @@ public class EventBlock extends Block{
 
 	@Override
 	public void paint(GraphicsContext gc) {
-		gc.drawImage(image, (int)position.getX(), (int)position.getY());		
+		gc.drawImage(image, (int)position.getX(), (int)position.getY());
+		drawHitbox(gc, hitbox.getPoints().length);
 	}
 
 	@Override

@@ -35,6 +35,7 @@ public class RedSkull extends RandomMover {
 		collisionHandling('x');
 		position.setY(position.getY() + yDirection * speed);
 		collisionHandling('y');
+		hitbox.move(xDirection * speed, yDirection * speed);
 		movementCounter--;
 
 	}
@@ -45,20 +46,28 @@ public class RedSkull extends RandomMover {
 			Entity entity = getIntersectingObject();
 			if (entity != null)
 				if (entity instanceof Block)
-					if (((Block) entity).isSolid())
+					if (((Block) entity).isSolid()) {
 						position.setX(position.getX() - speed * xDirection);
+						hitbox.move(-xDirection * speed, 0);
+					}
 			entity = getIntersectingEntity();
-			if (entity != null)
+			if (entity != null) {
 				position.setX(position.getX() - speed * xDirection);
+				hitbox.move(-xDirection * speed, 0);
+			}
 		} else if (XorY == 'y') {
 			Entity entity = getIntersectingObject();
 			if (entity != null)
 				if (entity instanceof Block)
-					if (((Block) entity).isSolid())
+					if (((Block) entity).isSolid()) {
 						position.setY(position.getY() - speed * yDirection);
+						hitbox.move(0, -yDirection * speed);
+					}
 			entity = getIntersectingEntity();
-			if (entity != null)
+			if (entity != null) {
 				position.setY(position.getY() - speed * yDirection);
+				hitbox.move(0, -yDirection * speed);
+			}
 		}
 	}
 	
@@ -66,6 +75,7 @@ public class RedSkull extends RandomMover {
 	public void paint(GraphicsContext gc) {
 		switchImage();
 		gc.drawImage(images[imageIndex], (int) position.getX(), (int) position.getY());
+		drawHitbox(gc, hitbox.getPoints().length);
 	}
 
 	private void switchImage() {

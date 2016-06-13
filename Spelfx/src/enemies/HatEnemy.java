@@ -98,5 +98,6 @@ public class HatEnemy extends HostileEntity {
 		gc.drawImage(image, (int) position.getX(), (int) position.getY());
 		gc.setStroke(Color.RED);
 		gc.strokeRect(position.getX() + 15, position.getY() + 5, 70, 110);
+		drawHitbox(gc, hitbox.getPoints().length);
 	}
 }

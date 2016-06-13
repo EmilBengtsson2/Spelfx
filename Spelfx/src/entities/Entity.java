@@ -2,6 +2,7 @@ package entities;
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import others.Player;
 import others.Polygon;
 import others.Position;
@@ -52,6 +53,11 @@ public abstract class Entity {
 		}
 		
 		public abstract void paint(GraphicsContext gc);
+		
+		protected void drawHitbox(GraphicsContext gc, int nodes) {
+			gc.setStroke(Color.ORANGERED);
+			gc.strokePolygon(hitbox.getXPoints(), hitbox.getYPoints(), nodes);
+		}
 		
 		//letar block
 		public Entity getIntersectingObject() {

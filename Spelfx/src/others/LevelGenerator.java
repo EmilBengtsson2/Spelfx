@@ -55,6 +55,8 @@ public class LevelGenerator {
 	    			
 	    		}else if(matrix[i][j].equals("x")){
 	    			world.getAnimateEntities().add(new RedSkull(63*i,59*j));
+	    		}else if(matrix[i][j].equals("h")){
+	    			world.getAnimateEntities().add(new HappyArrow(63*i, 59*j));
 	    		}else if(matrix[i][j].equals("D")){
 	    			world.getObjects().add(new EventBlock(63*i, 59*j));
 	    		}

@@ -88,6 +88,8 @@ public class Player extends AnimateEntity {
 
 		position.setY(position.getY() + speed * listener.getVerticalMult());
 		collisionHandling('y');
+		
+		hitbox.move(speed * listener.getHorizontalMult(), speed * listener.getVerticalMult());
 
 		mousePos = listener.getMousePos();
 		if (listener.getMouseDown())
@@ -99,26 +101,34 @@ public class Player extends AnimateEntity {
 			Entity entity = getIntersectingObject();
 			if (entity != null)
 				if (entity instanceof Block) {
-					if (((Block) entity).isSolid())
+					if (((Block) entity).isSolid()) {
 						position.setX(position.getX() - speed * listener.getHorizontalMult());
+						hitbox.move(-speed * listener.getHorizontalMult(), 0);
+					}
 					else if (entity instanceof EventBlock && !((Block) entity).getEventStatus())
 						((Block) entity).event();
 				}
 			entity = getIntersectingEntity();
-			if (entity != null)
+			if (entity != null) {
 				position.setX(position.getX() - speed * listener.getHorizontalMult());
+				hitbox.move(-speed * listener.getHorizontalMult(), 0);
+			}
 		} else if (XorY == 'y') {
 			Entity entity = getIntersectingObject();
 			if (entity != null)
 				if (entity instanceof Block) {
-					if (((Block) entity).isSolid())
+					if (((Block) entity).isSolid()) {
 						position.setY(position.getY() - speed * listener.getVerticalMult());
+						hitbox.move(0, -speed * listener.getVerticalMult());
+					}
 					else if (entity instanceof EventBlock && !((Block) entity).getEventStatus())
 						((Block) entity).event();
 				}
 			entity = getIntersectingEntity();
-			if (entity != null)
+			if (entity != null) {
 				position.setY(position.getY() - speed * listener.getVerticalMult());
+				hitbox.move(0, -speed * listener.getVerticalMult());
+			}
 		}
 	}
 
@@ -168,6 +178,8 @@ public class Player extends AnimateEntity {
 						- Math.acos((Math.abs(mX - (x))) / Math.sqrt(Math.pow(y - mY, 2) + Math.pow(mX - (x), 2)));
 			}
 		}
+		
+		hitbox.rotate(-hitbox.getRotation() - rotation + Math.PI / 2);
 
 		if (weapon != null)
 			weapon.paint(gc);
@@ -176,6 +188,7 @@ public class Player extends AnimateEntity {
 		gc.translate(x, y);
 		gc.rotate(Math.toDegrees(-rotation));
 		gc.translate(-x, -y);
+		drawHitbox(gc, hitbox.getPoints().length);
 	}
 
 	private void centerPlayer(GraphicsContext gc) {
