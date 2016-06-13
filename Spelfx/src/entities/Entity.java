@@ -23,6 +23,11 @@ public abstract class Entity {
 			this.width = width;
 			this.height = height;
 			this.center = center;
+			setHitbox();
+		}
+		
+		private void setHitbox() {
+			double x = position.getX(), y = position.getY();
 			Position[] temp = new Position[4];
 			temp[0] = new Position(x, y);
 			temp[1] = new Position(x + width, y);

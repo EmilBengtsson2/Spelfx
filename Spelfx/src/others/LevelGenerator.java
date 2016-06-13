@@ -6,6 +6,7 @@ import enemies.HappyArrow;
 import enemies.HatEnemy;
 import enemies.RedSkull;
 import framework.PlayerListener;
+import objects.DoorBlock;
 import objects.EventBlock;
 import objects.WallBlock;
 import weapons.Spear;
@@ -58,7 +59,7 @@ public class LevelGenerator {
 	    		}else if(matrix[i][j].equals("h")){
 	    			world.getAnimateEntities().add(new HappyArrow(63*i, 59*j));
 	    		}else if(matrix[i][j].equals("D")){
-	    			world.getObjects().add(new EventBlock(63*i, 59*j));
+	    			world.getObjects().add(new DoorBlock(63*i, 59*j));
 	    		}
 	    	}
 		}
