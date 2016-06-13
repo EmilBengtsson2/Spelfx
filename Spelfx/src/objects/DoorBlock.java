@@ -9,6 +9,7 @@ public class DoorBlock extends Block {
 
 	public DoorBlock(int x, int y) {
 		super(x, y, image.getWidth(), image.getHeight());
+		isSolid = true;
 	}
 	
 	public void paint(GraphicsContext gc) {
