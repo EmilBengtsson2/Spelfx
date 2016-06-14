@@ -65,7 +65,7 @@ public class PlayerListener {
 		canvas.setOnMouseMoved(e -> {
 			mousePos.setX(e.getX() - translatedX);
 			mousePos.setY(e.getY() - translatedY);
-			System.out.println("X: " + mousePos.getX() + "\tY: " + mousePos.getY());
+			//System.out.println("X: " + mousePos.getX() + "\tY: " + mousePos.getY());
 		});
 		
 		canvas.setOnKeyPressed(e -> {

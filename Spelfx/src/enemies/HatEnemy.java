@@ -8,19 +8,37 @@ import entities.Entity;
 import entities.HostileEntity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import objects.Block;
+import others.Polygon;
+import others.Position;
 
 public class HatEnemy extends HostileEntity {
 
 	private static Image image = new Image("/PicResource/HatEnemy.gif");
 
-	private final static double SPEED = 2.0;
+	private final static double SPEED = 3;
 	private final static int HEALTH = 100;
 
 	public HatEnemy(int x, int y) {
 		super(x, y, image.getWidth(), image.getHeight());
 		setStats(SPEED, HEALTH);
+		setHitbox();
+	}
+
+	private void setHitbox() {
+		double tempX = position.getX(), tempY = position.getY();
+		Position[] temp = new Position[10];
+		temp[0] = new Position(tempX + 20, tempY);
+		temp[1] = new Position(tempX + width - 20, tempY);
+		temp[2] = new Position(tempX + width, tempY + 35);
+		temp[3] = new Position(tempX + width, tempY + 55);
+		temp[4] = new Position(tempX + width - 13, tempY + 95);
+		temp[5] = new Position(tempX + width / 2 + 10, tempY + height);
+		temp[6] = new Position(tempX + width / 2 - 10, tempY + height);
+		temp[7] = new Position(tempX + 13, tempY + 95);
+		temp[8] = new Position(tempX, tempY + 55);
+		temp[9] = new Position(tempX, tempY + 35);
+		hitbox = new Polygon(temp, center);
 	}
 
 	@Override
@@ -32,18 +50,21 @@ public class HatEnemy extends HostileEntity {
 		if (dx > 0) {
 			position.setX(position.getX() - speed);
 			collisionHandling('X');
-		} else {
+			hitbox.move(-speed, 0);
+		} else if (dx != 0) {
 			position.setX(position.getX() + speed);
 			collisionHandling('x');
+			hitbox.move(speed, 0);
 		}
 		if (dy > 0) {
 			position.setY(position.getY() - speed);
 			collisionHandling('Y');
-		} else {
+			hitbox.move(0, -speed);
+		} else if (dy != 0) {
 			position.setY(position.getY() + speed);
 			collisionHandling('y');
+			hitbox.move(0, speed);
 		}
-
 	}
 
 	@Override
@@ -53,34 +74,46 @@ public class HatEnemy extends HostileEntity {
 			if (entity != null)
 				if (entity instanceof Block)
 					if (((Block) entity).isSolid()) {
-						if (XorY == 'X')
+						if (XorY == 'X') {
 							position.setX(position.getX() + speed);
-						else
+							hitbox.move(speed, 0);
+						} else {
 							position.setX(position.getX() - speed);
+							hitbox.move(-speed, 0);
+						}
 					}
 			entity = getIntersectingEntity();
 			if (entity != null) {
-				if (XorY == 'X')
+				if (XorY == 'X') {
 					position.setX(position.getX() + speed);
-				else
+					hitbox.move(speed, 0);
+				} else {
 					position.setX(position.getX() - speed);
+					hitbox.move(-speed, 0);
+				}
 			}
 		} else if (XorY == 'y' || XorY == 'Y') {
 			Entity entity = getIntersectingObject();
 			if (entity != null)
 				if (entity instanceof Block)
 					if (((Block) entity).isSolid()) {
-						if (XorY == 'Y')
+						if (XorY == 'Y') {
 							position.setY(position.getY() + speed);
-						else
+							hitbox.move(0, speed);
+						} else {
 							position.setY(position.getY() - speed);
+							hitbox.move(0, -speed);
+						}
 					}
 			entity = getIntersectingEntity();
 			if (entity != null) {
-				if (XorY == 'Y')
+				if (XorY == 'Y') {
 					position.setY(position.getY() + speed);
-				else
+					hitbox.move(0, speed);
+				} else {
 					position.setY(position.getY() - speed);
+					hitbox.move(0, -speed);
+				}
 			}
 		}
 	}
@@ -96,8 +129,6 @@ public class HatEnemy extends HostileEntity {
 	@Override
 	public void paint(GraphicsContext gc) {
 		gc.drawImage(image, (int) position.getX(), (int) position.getY());
-		gc.setStroke(Color.RED);
-		gc.strokeRect(position.getX() + 15, position.getY() + 5, 70, 110);
 		drawHitbox(gc, hitbox.getPoints().length);
 	}
 }

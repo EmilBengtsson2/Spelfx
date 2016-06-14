@@ -38,6 +38,21 @@ public class Player extends AnimateEntity {
 		this.listener = listener;
 		mousePos = listener.getMousePos();
 		tX = tY = 0;
+		setHitbox();
+	}
+	
+	private void setHitbox() {
+		double tempX = position.getX(), tempY = position.getY();
+		Position[] temp = new Position[8];
+		temp[0] = new Position(tempX + width / 2 - 8, tempY);
+		temp[1] = new Position(tempX + width / 2 + 8, tempY);
+		temp[2] = new Position(tempX + width / 2 + 17, tempY + 10);
+		temp[3] = new Position(tempX + width / 2 + 17, tempY + height - 10);
+		temp[4] = new Position(tempX + width / 2 + 8, tempY + height);
+		temp[5] = new Position(tempX + width / 2 - 8, tempY + height);
+		temp[6] = new Position(tempX + width / 2 - 16, tempY + height - 10);
+		temp[7] = new Position(tempX + width / 2 - 16, tempY + 10);
+		hitbox = new Polygon(temp, center);
 	}
 
 	private void loadImages() {
