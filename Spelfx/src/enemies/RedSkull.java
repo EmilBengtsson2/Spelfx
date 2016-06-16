@@ -31,46 +31,58 @@ public class RedSkull extends RandomMover {
 			yDirection = rdm.nextInt(3) - 1;
 			movementCounter = 100;
 		}
-		position.setX(position.getX() + xDirection * speed);
+		hitbox.move(xDirection * speed, 0);
 		collisionHandling('x');
-		position.setY(position.getY() + yDirection * speed);
+		hitbox.move(0, yDirection * speed);
 		collisionHandling('y');
-		hitbox.move(xDirection * speed, yDirection * speed);
-		movementCounter--;
 
+		movementCounter--;
 	}
-	
+
 	@Override
 	protected void collisionHandling(char XorY) {
+		boolean move = true;
 		if (XorY == 'x') {
 			Entity entity = getIntersectingObject();
-			if (entity != null)
-				if (entity instanceof Block)
-					if (((Block) entity).isSolid()) {
-						position.setX(position.getX() - speed * xDirection);
-						hitbox.move(-xDirection * speed, 0);
-					}
-			entity = getIntersectingEntity();
 			if (entity != null) {
-				position.setX(position.getX() - speed * xDirection);
-				hitbox.move(-xDirection * speed, 0);
+				if (entity instanceof Block) {
+					if (((Block) entity).isSolid()) {
+						hitbox.move(-xDirection * speed, 0);
+						move = false;
+					}
+				}
+			} else {
+				entity = getIntersectingEntity();
+				if (entity != null) {
+					hitbox.move(-xDirection * speed, 0);
+					move = false;
+				}
 			}
 		} else if (XorY == 'y') {
 			Entity entity = getIntersectingObject();
-			if (entity != null)
-				if (entity instanceof Block)
-					if (((Block) entity).isSolid()) {
-						position.setY(position.getY() - speed * yDirection);
-						hitbox.move(0, -yDirection * speed);
-					}
-			entity = getIntersectingEntity();
 			if (entity != null) {
-				position.setY(position.getY() - speed * yDirection);
-				hitbox.move(0, -yDirection * speed);
+				if (entity instanceof Block) {
+					if (((Block) entity).isSolid()) {
+						hitbox.move(0, -yDirection * speed);
+						move = false;
+					}
+				}
+			} else {
+				entity = getIntersectingEntity();
+				if (entity != null) {
+					hitbox.move(0, -yDirection * speed);
+					move = false;
+				}
 			}
 		}
+		if (move) {
+			if (XorY == 'x')
+				position.setX(position.getX() + xDirection * speed);
+			else if (XorY == 'y')
+				position.setY(position.getY() + yDirection * speed);
+		}
 	}
-	
+
 	@Override
 	public void paint(GraphicsContext gc) {
 		switchImage();
@@ -88,9 +100,10 @@ public class RedSkull extends RandomMover {
 
 	@Override
 	public AnimateEntity checkArcIntersection(Double arc) {
-		if(arc.intersects(new Rectangle2D.Double(position.getX(), position.getY(), images[0].getWidth(), images[0].getHeight()))) {
+		if (arc.intersects(new Rectangle2D.Double(position.getX(), position.getY(), images[0].getWidth(),
+				images[0].getHeight()))) {
 			return this;
 		}
-		return null;		
+		return null;
 	}
 }

@@ -25,6 +25,7 @@ public class Player extends AnimateEntity {
 	private Position mousePos;
 	private Weapon weapon;
 	private double rotation;
+	private double rotationBuildup;
 	private int tX, tY;
 	private final static double SPEED = 6.0;
 	private final static int HEALTH = 20;
@@ -39,8 +40,9 @@ public class Player extends AnimateEntity {
 		mousePos = listener.getMousePos();
 		tX = tY = 0;
 		setHitbox();
+		rotationBuildup = 0;
 	}
-	
+
 	private void setHitbox() {
 		double tempX = position.getX(), tempY = position.getY();
 		Position[] temp = new Position[8];
@@ -98,13 +100,11 @@ public class Player extends AnimateEntity {
 
 	@Override
 	public void action() {
-		position.setX(position.getX() + speed * listener.getHorizontalMult());
+		hitbox.move(speed * listener.getHorizontalMult(), 0);
 		collisionHandling('x');
 
-		position.setY(position.getY() + speed * listener.getVerticalMult());
+		hitbox.move(0, speed * listener.getVerticalMult());
 		collisionHandling('y');
-		
-		hitbox.move(speed * listener.getHorizontalMult(), speed * listener.getVerticalMult());
 
 		mousePos = listener.getMousePos();
 		if (listener.getMouseDown())
@@ -112,38 +112,47 @@ public class Player extends AnimateEntity {
 	}
 
 	protected void collisionHandling(char XorY) {
+		boolean move = true;
 		if (XorY == 'x') {
-			Entity entity = getIntersectingObject();
-			if (entity != null)
-				if (entity instanceof Block) {
-					if (((Block) entity).isSolid()) {
-						position.setX(position.getX() - speed * listener.getHorizontalMult());
-						hitbox.move(-speed * listener.getHorizontalMult(), 0);
-					}
-					else if (entity instanceof EventBlock && !((Block) entity).getEventStatus())
-						((Block) entity).event();
-				}
-			entity = getIntersectingEntity();
+			Entity entity = getIntersectingEntity();
 			if (entity != null) {
-				position.setX(position.getX() - speed * listener.getHorizontalMult());
 				hitbox.move(-speed * listener.getHorizontalMult(), 0);
+				move = false;
+			} else {
+				entity = getIntersectingObject();
+				if (entity != null) {
+					if (entity instanceof Block) {
+						if (((Block) entity).isSolid()) {
+							hitbox.move(-speed * listener.getHorizontalMult(), 0);
+							move = false;
+						} else if (entity instanceof EventBlock && !((Block) entity).getEventStatus())
+							((Block) entity).event();
+					}
+				}
 			}
 		} else if (XorY == 'y') {
-			Entity entity = getIntersectingObject();
-			if (entity != null)
-				if (entity instanceof Block) {
-					if (((Block) entity).isSolid()) {
-						position.setY(position.getY() - speed * listener.getVerticalMult());
-						hitbox.move(0, -speed * listener.getVerticalMult());
-					}
-					else if (entity instanceof EventBlock && !((Block) entity).getEventStatus())
-						((Block) entity).event();
-				}
-			entity = getIntersectingEntity();
+			Entity entity = getIntersectingEntity();
 			if (entity != null) {
-				position.setY(position.getY() - speed * listener.getVerticalMult());
 				hitbox.move(0, -speed * listener.getVerticalMult());
+				move = false;
+			} else {
+				entity = getIntersectingObject();
+				if (entity != null) {
+					if (entity instanceof Block) {
+						if (((Block) entity).isSolid()) {
+							hitbox.move(0, -speed * listener.getVerticalMult());
+							move = false;
+						} else if (entity instanceof EventBlock && !((Block) entity).getEventStatus())
+							((Block) entity).event();
+					}
+				}
 			}
+		}
+		if (move) {
+			if (XorY == 'x')
+				position.setX(position.getX() + speed * listener.getHorizontalMult());
+			else if (XorY == 'y')
+				position.setY(position.getY() + speed * listener.getVerticalMult());
 		}
 	}
 
@@ -193,8 +202,15 @@ public class Player extends AnimateEntity {
 						- Math.acos((Math.abs(mX - (x))) / Math.sqrt(Math.pow(y - mY, 2) + Math.pow(mX - (x), 2)));
 			}
 		}
+
+		hitbox.rotate(-hitbox.getRotation() - rotation + Math.PI / 2 + rotationBuildup);
+		if (getIntersectingObject() != null || getIntersectingEntity() != null) {
+			hitbox.rotate(rotation - Math.PI / 2 - rotationBuildup);
+			//rotationBuildup += - rotation + Math.PI / 2;
+		} else {
+			//rotationBuildup = 0;
+		}
 		
-		hitbox.rotate(-hitbox.getRotation() - rotation + Math.PI / 2);
 
 		if (weapon != null)
 			weapon.paint(gc);

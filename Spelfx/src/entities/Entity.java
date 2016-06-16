@@ -85,20 +85,21 @@ public abstract class Entity {
 			return null;
 		}
 		//kollar korsande rektanglar mellan Entity1 och Entity2, returnerar true vid intersection.
-		private boolean intersects(Entity e) {			
-			Position e1UpperLeft = getPosition();
-			Position e1LowerRight = new Position(getPosition().getX() + getWidth(),
-					getPosition().getY() + getHeight());
-
-			Position e2UpperLeft = e.getPosition();
-			Position e2LowerRight = new Position(e.getPosition().getX() + e.getWidth(),
-					e.getPosition().getY() + e.getHeight());
-
-			if (e1UpperLeft.getX() > e2LowerRight.getX() || e1LowerRight.getX() < e2UpperLeft.getX()
-					|| e1UpperLeft.getY() > e2LowerRight.getY() || e1LowerRight.getY() < e2UpperLeft.getY()) {
-				return false;
-			}
-			return true;
+		private boolean intersects(Entity e) {
+			return hitbox.intersects(e.getHitbox());
+//			Position e1UpperLeft = getPosition();
+//			Position e1LowerRight = new Position(getPosition().getX() + getWidth(),
+//					getPosition().getY() + getHeight());
+//
+//			Position e2UpperLeft = e.getPosition();
+//			Position e2LowerRight = new Position(e.getPosition().getX() + e.getWidth(),
+//					e.getPosition().getY() + e.getHeight());
+//
+//			if (e1UpperLeft.getX() > e2LowerRight.getX() || e1LowerRight.getX() < e2UpperLeft.getX()
+//					|| e1UpperLeft.getY() > e2LowerRight.getY() || e1LowerRight.getY() < e2UpperLeft.getY()) {
+//				return false;
+//			}
+//			return true;
 		}
 
 	}

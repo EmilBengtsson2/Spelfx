@@ -33,8 +33,13 @@ public class Polygon {
 	 */
 	public void rotate(double theta) {
 		rotation += theta;
-		if(rotation / (2 * Math.PI) < 1)
-			rotation = rotation - 2 * Math.PI;
+		if (rotation / (2 * Math.PI) < 1) {
+			if (rotation > 0)
+				rotation = rotation - 2 * Math.PI;
+			else if (rotation < 0)
+				rotation = rotation + 2 * Math.PI;
+		}
+		System.out.println(rotation);
 		Position[] tempPoints = new Position[points.length];
 		double alpha;
 		for (int i = 0; i < points.length; i++) {

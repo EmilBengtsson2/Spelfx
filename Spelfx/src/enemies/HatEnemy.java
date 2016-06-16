@@ -48,73 +48,86 @@ public class HatEnemy extends HostileEntity {
 		double dy = position.getY() - player.getPosition().getY();
 
 		if (dx > 0) {
-			position.setX(position.getX() - speed);
-			collisionHandling('X');
 			hitbox.move(-speed, 0);
+			collisionHandling('X');
 		} else if (dx != 0) {
-			position.setX(position.getX() + speed);
-			collisionHandling('x');
 			hitbox.move(speed, 0);
+			collisionHandling('x');
 		}
 		if (dy > 0) {
-			position.setY(position.getY() - speed);
-			collisionHandling('Y');
 			hitbox.move(0, -speed);
+			collisionHandling('Y');
 		} else if (dy != 0) {
-			position.setY(position.getY() + speed);
-			collisionHandling('y');
 			hitbox.move(0, speed);
+			collisionHandling('y');
 		}
 	}
 
 	@Override
 	protected void collisionHandling(char XorY) {
+		boolean move = true;
 		if (XorY == 'x' || XorY == 'X') {
 			Entity entity = getIntersectingObject();
-			if (entity != null)
-				if (entity instanceof Block)
+			if (entity != null) {
+				if (entity instanceof Block) {
 					if (((Block) entity).isSolid()) {
 						if (XorY == 'X') {
-							position.setX(position.getX() + speed);
 							hitbox.move(speed, 0);
+							move = false;
 						} else {
-							position.setX(position.getX() - speed);
 							hitbox.move(-speed, 0);
+							move = false;
 						}
 					}
-			entity = getIntersectingEntity();
-			if (entity != null) {
-				if (XorY == 'X') {
-					position.setX(position.getX() + speed);
-					hitbox.move(speed, 0);
-				} else {
-					position.setX(position.getX() - speed);
-					hitbox.move(-speed, 0);
+				}
+			} else {
+				entity = getIntersectingEntity();
+				if (entity != null) {
+					if (XorY == 'X') {
+						hitbox.move(speed, 0);
+						move = false;
+					} else {
+						hitbox.move(-speed, 0);
+						move = false;
+					}
 				}
 			}
 		} else if (XorY == 'y' || XorY == 'Y') {
 			Entity entity = getIntersectingObject();
-			if (entity != null)
-				if (entity instanceof Block)
+			if (entity != null) {
+				if (entity instanceof Block) {
 					if (((Block) entity).isSolid()) {
 						if (XorY == 'Y') {
-							position.setY(position.getY() + speed);
 							hitbox.move(0, speed);
+							move = false;
 						} else {
-							position.setY(position.getY() - speed);
 							hitbox.move(0, -speed);
+							move = false;
 						}
 					}
-			entity = getIntersectingEntity();
-			if (entity != null) {
-				if (XorY == 'Y') {
-					position.setY(position.getY() + speed);
-					hitbox.move(0, speed);
-				} else {
-					position.setY(position.getY() - speed);
-					hitbox.move(0, -speed);
+				}
+			} else {
+				entity = getIntersectingEntity();
+				if (entity != null) {
+					if (XorY == 'Y') {
+						hitbox.move(0, speed);
+						move = false;
+					} else {
+						hitbox.move(0, -speed);
+						move = false;
+					}
 				}
 			}
+		}
+		if (move) {
+			if (XorY == 'X')
+				position.setX(position.getX() - speed);
+			else if (XorY == 'x')
+				position.setX(position.getX() + speed);
+			else if (XorY == 'Y')
+				position.setY(position.getY() - speed);
+			else if (XorY == 'y')
+				position.setY(position.getY() + speed);
 		}
 	}
 
