@@ -1,14 +1,10 @@
 package others;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 import enemies.HappyArrow;
 import enemies.HatEnemy;
 import enemies.RedSkull;
 import framework.PlayerListener;
 import objects.DoorBlock;
-import objects.EventBlock;
 import objects.WallBlock;
 import weapons.Spear;
 
@@ -26,45 +22,29 @@ public class LevelGenerator {
 
 	private static void level1(World world, PlayerListener listener) {
 		Player player = new Player(600, 400, listener, world);
-		player.setWeapon(new Spear(player, world.getEntityController())); // Här
-																			// byter
-																			// man
-																			// vapen
-		// player.setWeapon(new Sword2(player));
+		player.setWeapon(new Spear(player, world.getEntityController()));
+		//Här byter man vapen
+		
 		world.getAnimateEntities().add(player);
 
 		// Block, 63 pixels wide, height 59 atm.
 
-		String design = room.getRoom();
+		char[][] design = room.getRoom();
 
-		Scanner sc = new Scanner(design).useDelimiter("[.]");
-		final int rows = room.getRows();
-		final int cols = room.getCols();
-		String[][] matrix = new String[rows][cols];
-		for (int r = 0; r < rows; r++) {
-			for (int c = 0; c < cols; c++) {
-				matrix[r][c] = sc.next();
-			}
-		}
-
-		System.out.print(matrix[1][2]);
-
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 24; j++) {
-				if (matrix[i][j].equals("-")) {
+		for (int i = 0; i < room.getRows(); i++) {
+			for (int j = 0; j < room.getCols(); j++) {
+				if (design[j][i] == '-') {
 					world.getObjects().add(new WallBlock(j * 63, i * 59));
-
-				} else if (matrix[i][j].equals("x")) {
-					world.getAnimateEntities().add(new RedSkull(63 * i, 59 * j));
-				} else if (matrix[i][j].equals("h")) {
-					world.getAnimateEntities().add(new HappyArrow(63 * i, 59 * j));
-				} else if (matrix[i][j].equals("D")) {
-					world.getObjects().add(new DoorBlock(63 * i, 59 * j, 'V'));
-				} else if (matrix[i][j].equals("H")) {
-					world.getAnimateEntities().add(new HatEnemy(63 * i, 59 * j));
+				} else if (design[j][i] == 'x') {
+					world.getAnimateEntities().add(new RedSkull(63 * j, 59 * i));
+				} else if (design[j][i] == 'h') {
+					world.getAnimateEntities().add(new HappyArrow(63 * j, 59 * i));
+				} else if (design[j][i] == 'D') {
+					world.getObjects().add(new DoorBlock(63 * j, 59 * i, 'V'));
+				} else if (design[j][i] == 'H') {
+					world.getAnimateEntities().add(new HatEnemy(63 * j, 59 * i));
 				}
 			}
 		}
-		sc.close();
 	}
 }
