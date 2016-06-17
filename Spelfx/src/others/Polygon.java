@@ -39,7 +39,7 @@ public class Polygon {
 			else if (rotation < 0)
 				rotation = rotation + 2 * Math.PI;
 		}
-		System.out.println(rotation);
+		
 		Position[] tempPoints = new Position[points.length];
 		double alpha;
 		for (int i = 0; i < points.length; i++) {

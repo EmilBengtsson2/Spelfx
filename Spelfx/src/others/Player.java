@@ -25,7 +25,7 @@ public class Player extends AnimateEntity {
 	private Position mousePos;
 	private Weapon weapon;
 	private double rotation;
-	private double rotationBuildup;
+	private double lastRotation;
 	private int tX, tY;
 	private final static double SPEED = 6.0;
 	private final static int HEALTH = 20;
@@ -40,7 +40,7 @@ public class Player extends AnimateEntity {
 		mousePos = listener.getMousePos();
 		tX = tY = 0;
 		setHitbox();
-		rotationBuildup = 0;
+		lastRotation = 0;
 	}
 
 	private void setHitbox() {
@@ -203,12 +203,12 @@ public class Player extends AnimateEntity {
 			}
 		}
 
-		hitbox.rotate(-hitbox.getRotation() - rotation + Math.PI / 2 + rotationBuildup);
+		hitbox.rotate(-hitbox.getRotation() - rotation + Math.PI / 2);
 		if (getIntersectingObject() != null || getIntersectingEntity() != null) {
-			hitbox.rotate(rotation - Math.PI / 2 - rotationBuildup);
-			//rotationBuildup += - rotation + Math.PI / 2;
+			hitbox.rotate(rotation - Math.PI / 2);
+			hitbox.rotate(-hitbox.getRotation() - lastRotation + Math.PI / 2);
 		} else {
-			//rotationBuildup = 0;
+			lastRotation = rotation;
 		}
 		
 
