@@ -34,15 +34,18 @@ public class LevelGenerator {
 		for (int i = 0; i < room.getRows(); i++) {
 			for (int j = 0; j < room.getCols(); j++) {
 				if (design[j][i] == '-') {
-					world.getObjects().add(new WallBlock(j * 63, i * 59));
+					world.getObjects().add(new WallBlock(j * 50, i * 50));
 				} else if (design[j][i] == 'x') {
-					world.getAnimateEntities().add(new RedSkull(63 * j, 59 * i));
+					world.getAnimateEntities().add(new RedSkull(50 * j, 50 * i));
 				} else if (design[j][i] == 'h') {
-					world.getAnimateEntities().add(new HappyArrow(63 * j, 59 * i));
+					world.getAnimateEntities().add(new HappyArrow(50 * j, 50 * i));
 				} else if (design[j][i] == 'D') {
-					world.getObjects().add(new DoorBlock(63 * j, 59 * i, 'V'));
+					if (j+1 < room.getCols() && design[j+1][i] == 'D')
+						world.getObjects().add(new DoorBlock(50 * j, 50 * i, 'H'));
+					else if (i+1 < room.getRows() && design[j][i+1] == 'D')
+						world.getObjects().add(new DoorBlock(50 * j, 50 * i, 'V'));
 				} else if (design[j][i] == 'H') {
-					world.getAnimateEntities().add(new HatEnemy(63 * j, 59 * i));
+					world.getAnimateEntities().add(new HatEnemy(50 * j, 50 * i));
 				}
 			}
 		}

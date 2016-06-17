@@ -7,7 +7,7 @@ import others.Position;
 
 public class DoorBlock extends Block {
 
-	private static Image image = new Image("/PicResource/Door_horizontal.png");
+	private static Image image = new Image("/PicResource/Door_Horizontal.png");
 
 	public DoorBlock(int x, int y, char VorH_orientation) {
 		super(x, y, image.getWidth(), image.getHeight());
@@ -15,7 +15,7 @@ public class DoorBlock extends Block {
 		if(VorH_orientation == 'H') {
 			setHitboxHorizontal();
 		} else {
-			image = new Image("/PicResource/Door_vertical.png");
+			image = new Image("/PicResource/Door_Vertical.png");
 			setHitboxVertical();
 		}
 	}
@@ -23,20 +23,20 @@ public class DoorBlock extends Block {
 	private void setHitboxHorizontal() {
 		double tempX = position.getX(), tempY = position.getY();
 		Position[] temp = new Position[4];
-		temp[0] = new Position(tempX + width / 2 - 8, tempY);
-		temp[1] = new Position(tempX + width / 2 + 8, tempY);
-		temp[2] = new Position(tempX + width / 2 + 8, tempY + height);
-		temp[3] = new Position(tempX + width / 2 - 8, tempY + height);
+		temp[0] = new Position(tempX, tempY + height / 2 - 8);
+		temp[1] = new Position(tempX, tempY + height / 2 + 8);
+		temp[2] = new Position(tempX + width, tempY + height / 2 + 8);
+		temp[3] = new Position(tempX + width, tempY + height / 2 - 8);
 		hitbox = new Polygon(temp, center);
 	}
 
 	private void setHitboxVertical() {
 		double tempX = position.getX(), tempY = position.getY();
 		Position[] temp = new Position[4];
-		temp[0] = new Position(tempX, tempY + height / 2 - 8);
-		temp[1] = new Position(tempX, tempY + height / 2 + 8);
-		temp[2] = new Position(tempX + width, tempY + height / 2 + 8);
-		temp[3] = new Position(tempX + width, tempY + height / 2 - 8);
+		temp[0] = new Position(tempX + width / 2 - 8, tempY);
+		temp[1] = new Position(tempX + width / 2 + 8, tempY);
+		temp[2] = new Position(tempX + width / 2 + 8, tempY + height);
+		temp[3] = new Position(tempX + width / 2 - 8, tempY + height);
 		hitbox = new Polygon(temp, center);
 	}
 

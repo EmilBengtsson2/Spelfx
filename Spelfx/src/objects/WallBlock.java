@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 public class WallBlock extends Block {
 	
-	private static Image image = new Image("/PicResource/Block.png");
+	private static Image image = new Image("/PicResource/Block_Emerald.png");
 	
 	public WallBlock(int x, int y) {
 		super (x, y, image.getWidth(), image.getHeight());
