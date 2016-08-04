@@ -47,6 +47,7 @@ public class DoorBlock extends Block {
 
 	@Override
 	public void event() {
+		isSolid = false;
 		// TODO Auto-generated method stub
 
 	}

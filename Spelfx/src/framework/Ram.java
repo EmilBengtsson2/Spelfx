@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import others.Player;
 
@@ -46,16 +47,17 @@ public class Ram extends Application {
 		primaryStage.setHeight(HEIGHT);
 		Button b = start();
 		Button bQuit = quit();
-		TextArea ta = new TextArea();
-		ta.setFont(new Font(50));
-		ta.appendText("The Super Amazing Game");
-		ta.setMaxHeight(60);
+		
 		BorderPane pane = new BorderPane();
 		pane.setBottom(bQuit);
 		pane.autosize();
 		pane.setStyle(
 				"-fx-background-image: url(\"/PicResource/RedSkull4.png\");-fx-background-size: 1200, 900;-fx-background-repeat: no-repeat;");
 		pane.setCenter(b);
+		pane.getStylesheets().add("fancy.css");
+		Text ta = new Text();
+		ta.setId("fancytext");
+		ta.setText("The Super Amazing Game");
 		pane.setTop(ta);
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
